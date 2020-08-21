@@ -230,6 +230,7 @@ id |                slug
 #Structure of Each event type
 
 ## Event type 1
+```json
 {
   "client_application": "ADMIN_WEB",
   "oauth_client_id": "14e4009f-f761-4d44-9ee3-5caacada6dc6.vela.care",
@@ -237,8 +238,10 @@ id |                slug
   "user_id": "vela_default_347",
   "username": "beta_cm"
 }
+```
 
 ## Event-types 2, 3
+```json
 {
 "address_line1": null,
 "address_line2": null,
@@ -283,7 +286,7 @@ id |                slug
 "uuid": "eddc81ed-f5f5-4afe-91cd-2e595da922b8",
 "zip": null
 }
-
+```
 ## Event types 4, 5, 6:
 {
   "address_line1": null,
