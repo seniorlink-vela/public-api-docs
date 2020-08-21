@@ -1,12 +1,12 @@
-#Overview
+# Overview
     The Vela public api is designed to provide a rational, unified interface for Partners to interface with the Vela system
 
-##Swagger
+## Swagger
     The swagger for the Vela Public API is available at https://app.vela.care/public/api/docs/ for production and
     https://app.beta.alwaysreach.net/public/api/docs/ for the beta environment.  The beta environment is updated 3 weeks
     prior to a release to facilitate integration testing.
 
-##Utilizing public api
+## Utilizing public api
     All endpoints require authorization -- to use the public api the caller must have the public api permission associated with their account.
     ![image](images/admin-roles.png)
     (screen shot of admin roles page)
@@ -25,7 +25,7 @@
 		1) Get a token
 		2) Get the user by id
 		3) Patch the user
-##Getting a token
+## Getting a token
 	Vela uses an oauth style token.  The client ID is available on your organization's "Utility" page in the vela Admin application.
   ![image](images/admin-utilities.png)
 	Pass the client_id, a grant_type of "password" and the username and password as form params to the endpoint and it will respond with the following:
@@ -45,7 +45,7 @@
 	All other api calls (except where noted) require this oauth style token to access the resources.  So attach an `Authorization` header of type `bearer` with the access token's value to each request -- so for token value of "abcd" you would make a header of `Authorization` with the value `bearer abcd`.  The expires_in values is in seconds -- tokens at this time default to 4 hours in length (14400 seconds).
 	At this time we do not expose an endpoint to refresh the token. Any request made without a valid token will return a 401 error code.
 
-###Care teams:
+### Care teams:
     A care team is a consumer and the professional and non-professional people dedicated to their Care
     A care team has its own id - used to reference it.
     This id can be recovered by getting it by consumer -- example (have ref to consumer, get care team by consumer id, get ID from response)
@@ -53,7 +53,7 @@
         Operations: removing/adding a member.
         Updating care team
 
-###user_profiles:
+### user_profiles:
 	A user is a person who can participate in the Vela applications.
 	All user manipulations are under user-profiles in the API.
 	There are 4 types of users in Vela:
@@ -67,7 +67,7 @@
         Updating requires the ID
         Can update the ID - patch to old id value - set new id value in the request
 
-###user_suspensions
+### user_suspensions
 	Putting a user on suspension is like a temporary disenrollment from the program.
 	They will not be responsible for completing questionnaires during a suspension period.
     A suspension requires a start date, but the end date is optional; if not provided the person is suspended until the suspension is closed.
@@ -79,14 +79,14 @@
         Update, Delete, Get (by id)
 
 
-###Organizations:
+### Organizations:
      All organizations descend from a partner_id -- the root of your organization tree.
      Orgs can be added anywhere in your tree or moved. Moving a parent organization moves all its children with it.
      Example of creating a sub org within an organization:
      ![image](images/create-sub-org.png)
      ![image](images/create-sub-org-result.png)
 
-###Care data
+### Care data
     This is all data specific to a care team - its messaging, and questionnaires related to patient care.
     Attachments
         Can be uploaded (post), the information about them can be returned (get) and the attachment itself can be downloaded
@@ -100,15 +100,15 @@
         The get endpoint gets any message that fits the parameters supplied - for a given user (required), and for a date interval
     the chat logs are searched for any message that mathes the criteria
 
-###Questionnaires
+### Questionnaires
 	The submission by id endpoint gets one submitted questionnaire that matches the id.  The GET endpoint returns any questionnaire for the required user that fits the criteria.
 
-###Rate Limiting
+### Rate Limiting
     Access to the vela APIs is rate limited by a simple leaky bucket algorithm with a shared key so multiple server instances share the same counter.
     If you have exceeded your allotment, a 429 error can be returned from any endpoint.
     Usage statistics can be viewed at the "/events/usage-by-type" endpoint.
 
-###Events
+### Events
     The queues allow data to be pulled from the system to the partner.  The events are a time series of everything happening in vela.
     The different types of events are as follows:
     	user-login
@@ -137,7 +137,7 @@
     Added the types and structure (started) in the separate file -- should be integrated back into here
     A current list of event_types can be gotten from the event-types GET endpoint.
 
-###QUEUES:
+### QUEUES:
 	A queue is defined for you at each partner organization.  It can be edited with the patch endpoint -- and the events types desired.
 	The default is to receive them all.
 	Information can be received about the queue by calling the get endpoint.
@@ -169,14 +169,14 @@
     change what event types at any time.
     We should put https://app.dev.alwaysreach.net/public/api/internal-docs/#!/events/QueuePatch in the external docs -- since we let them change the event types
 
-##Webhooks:
+## Webhooks:
 	A webhook is similar to a queue.  Except it pushes from the server to the client, rather than the client making requests.
 	When a webhook is activated it wakes up on a timer and delivers the data to a predefined URL it can post to.
 	It will continue making deliveries until its data is exhausted (or the user tells it to stop, by pre-arranged contract).
 	Otherwise it behaves the same as the queues
 	We need to UI pages to make this useful  So just jotting a few notes here.  	Webhooks should be its own section of this guide and a separate story probably.
 
-##Getting a token
+## Getting a token
 	Vela uses an oauth style token.  The client ID is available on your organization's "Utility" (screenshot of https://app.dev.alwaysreach.net/admin/utilities here, maybe with client_id highlighted) page in the vela Admin application.
 	Pass the client_id, a grant_type of "password" and the username and password - as form params to the endpoint and it will respond with
 
@@ -199,7 +199,7 @@
 	At this time we do not expose and endpoint to refresh the token. Any request made without a valid token will return a 401 error code.
 
 
-#Appendix of Event Types
+# Appendix of Event Types
 
 
 id |                slug
@@ -229,7 +229,7 @@ id |                slug
 23 | questionnaire-assignment-submitted
 #Structure of Each event type
 
-##Event type 1
+## Event type 1
 {
   "client_application": "ADMIN_WEB",
   "oauth_client_id": "14e4009f-f761-4d44-9ee3-5caacada6dc6.vela.care",
@@ -238,7 +238,7 @@ id |                slug
   "username": "beta_cm"
 }
 
-##Event-types 2, 3
+## Event-types 2, 3
 {
 "address_line1": null,
 "address_line2": null,
@@ -284,7 +284,7 @@ id |                slug
 "zip": null
 }
 
-##Event types 4, 5, 6:
+## Event types 4, 5, 6:
 {
   "address_line1": null,
   "address_line2": null,
@@ -302,7 +302,7 @@ id |                slug
   "updated_by": "vela_default_da2161f4-246e-446f-ae38-1315dd370b11",
   "zip": null
 }
-##Event types 7, 8, 9, 10:
+## Event types 7, 8, 9, 10:
 {
   "authorized_at": null,
   "authorized_by": null,
@@ -316,7 +316,7 @@ id |                slug
   "status": "created",
   "updated_at": "2019-04-24T22:11:32Z"
 }
-##Event type 11:
+## Event type 11:
 {
   "authorized_at": "2019-04-24T22:19:50Z",
   "authorized_by": "V00000091870000000004",
@@ -354,7 +354,7 @@ id |                slug
   "status": "created",
   "updated_at": "2019-04-24T22:20:03Z"
 }
-##Event type 12:
+## Event type 12:
 {
   "additional_data": null,
   "attachment_id": null,
@@ -376,7 +376,7 @@ id |                slug
   "status": "ACTIVE",
   "updated_at": "2019-04-24T15:42:52Z"
 }
-##Event types 13-20:
+## Event types 13-20:
 {
   "answers": [],
   "associated_with_id": "IN315392213",
@@ -402,7 +402,7 @@ id |                slug
   "updated_by": "vela_default_241a1fca-3c0b-442c-a689-4d377225c395",
   "watchers": []
 }
-##Event type 21:
+## Event type 21:
 {
   "answers": [
     {
@@ -500,7 +500,7 @@ id |                slug
     }
   ]
 }
-##Event type 23:
+## Event type 23:
 {
   "answers": [
     {
