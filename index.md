@@ -201,6 +201,12 @@
 
 # Appendix of Event Types
 
+| id |  slug           |
+| ---|-----------------|
+| 1  | user-login      |
+| 2  | user-created    |
+| 3  | user-updated    |
+
 
 id |                slug
 ----+------------------------------------
@@ -243,48 +249,48 @@ id |                slug
 ## Event-types 2, 3
 ```json
 {
-"address_line1": null,
-"address_line2": null,
-"address_line3": null,
-"address_line4": null,
-"address_line5": null,
-"address_line6": null,
-"archived_at": null,
-"archived_by": null,
-"birthday": null,
-"city": null,
-"country": null,
-"created_at": "2019-04-24T17:51:03Z",
-"created_by": "V00000000010000000001",
-"disabled_at": null,
-"disenrolled_at": "3016-03-25T00:00:00Z",
-"email": "zzzzz+whynoput@gmail.com",
-"enrolled_at": "2019-04-24T17:50:01Z",
-"extended_properties": null,
-"first_name": "mike",
-"first_sign_in_at": null,
-"gender": "UNSPECIFIED",
-"id": "V00000091790000000001",
-"language": "en",
-"last_name": "example-ppe",
-"middle_name": null,
-"needs_onboarding": false,
-"organization_id": 1,
-"partner_id": 1,
-"primary_phone_number": "1115551212",
-"second_email": null,
-"secondary_phone_number": null,
-"state": null,
-"tertiary_phone_number": null,
-"timezone": "America/New_York",
-"updated_at": "2019-04-24T17:51:03Z",
-"updated_by": "V00000000010000000001",
-"user_type_category": "ADMIN",
-"user_type_id": 105,
-"user_type_name": "Admin",
-"username": "zzzzz+whynoput@gmail.com",
-"uuid": "eddc81ed-f5f5-4afe-91cd-2e595da922b8",
-"zip": null
+  "address_line1": null,
+  "address_line2": null,
+  "address_line3": null,
+  "address_line4": null,
+  "address_line5": null,
+  "address_line6": null,
+  "archived_at": null,
+  "archived_by": null,
+  "birthday": null,
+  "city": null,
+  "country": null,
+  "created_at": "2019-04-24T17:51:03Z",
+  "created_by": "V00000000010000000001",
+  "disabled_at": null,
+  "disenrolled_at": "3016-03-25T00:00:00Z",
+  "email": "zzzzz+whynoput@gmail.com",
+  "enrolled_at": "2019-04-24T17:50:01Z",
+  "extended_properties": null,
+  "first_name": "mike",
+  "first_sign_in_at": null,
+  "gender": "UNSPECIFIED",
+  "id": "V00000091790000000001",
+  "language": "en",
+  "last_name": "example-ppe",
+  "middle_name": null,
+  "needs_onboarding": false,
+  "organization_id": 1,
+  "partner_id": 1,
+  "primary_phone_number": "1115551212",
+  "second_email": null,
+  "secondary_phone_number": null,
+  "state": null,
+  "tertiary_phone_number": null,
+  "timezone": "America/New_York",
+  "updated_at": "2019-04-24T17:51:03Z",
+  "updated_by": "V00000000010000000001",
+  "user_type_category": "ADMIN",
+  "user_type_id": 105,
+  "user_type_name": "Admin",
+  "username": "zzzzz+whynoput@gmail.com",
+  "uuid": "eddc81ed-f5f5-4afe-91cd-2e595da922b8",
+  "zip": null
 }
 ```
 ## Event types 4, 5, 6:
