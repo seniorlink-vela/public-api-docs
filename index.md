@@ -1,15 +1,17 @@
 # Overview
+
 The Vela public api is designed to provide a rational, unified interface for Partners to interface with the Vela system
 
 ## Swagger
 The swagger for the Vela Public API is available at https://app.vela.care/public/api/docs/ for production and https://app.beta.alwaysreach.net/public/api/docs/ for the beta environment.  The beta environment is updated 3 weeks prior to a release to facilitate integration testing.
 
 ## Utilizing public api
+
 All endpoints require authorization -- to use the public api the caller must have the public api permission associated with their account.
 ![image](static/public/api/docs/images/admin-roles.png)
-The APIs are broken up into several sections - admin for user and care team data, care data for information regarding the care of
-a specific user and the events section -- which uses queues and webhooks to inform the partner of what data has been created or
-changed as it happens within the system.
+The APIs are broken up into several sections - admin for user and care team data, care data for information
+regarding the care of a specific user and the events section -- which uses queues and webhooks to inform the 
+partner of what data has been created or changed as it happens within the system.
 
 This is a Restful api, and follows standard conventions.  A user must have the public_api permission in Vela to access it.
 
@@ -21,7 +23,9 @@ This ID is unique to your partner organization and is supplied for ease of integ
 		1) Get a token
 		2) Get the user by id
 		3) Patch the user by id
+
 ## Getting a token
+
 Vela uses an oauth style token.  The client ID is available on your organization's "Utility" page in the vela Admin application.
 ![image](static/public/api/docs/images/admin-utilities.png)
 Pass the client_id, a grant_type of "password" and the username and password as form params to the endpoint and it will respond with the following:
