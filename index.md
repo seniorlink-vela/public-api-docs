@@ -8,7 +8,7 @@ The swagger for the Vela Public API is available at https://app.vela.care/public
 ## Utilizing public api
 
 All endpoints require authorization -- to use the public api the caller must have the public api permission associated with their account.
-![image](static/public/api/docs/images/admin-roles.png)
+![image](images/admin-roles.png)
 The APIs are broken up into several sections - admin for user and care team data, care data for information
 regarding the care of a specific user and the events section -- which uses queues and webhooks to inform the 
 partner of what data has been created or changed as it happens within the system.
@@ -27,7 +27,7 @@ This ID is unique to your partner organization and is supplied for ease of integ
 ## Getting a token
 
 Vela uses an oauth style token.  The client ID is available on your organization's "Utility" page in the vela Admin application.
-![image](static/public/api/docs/images/admin-utilities.png)
+![image](images/admin-utilities.png)
 Pass the client_id, a grant_type of "password" and the username and password as form params to the endpoint and it will respond with the following:
 	{
 	  "access_token": "string",
@@ -85,8 +85,8 @@ They will not be responsible for completing questionnaires during a suspension p
 All organizations descend from a partner_id -- the root of your organization tree.
 Orgs can be added anywhere in your tree or moved. Moving a parent organization moves all its children with it.
 Example of creating a sub org within an organization:
-  ![image](static/public/api/docs/images/create-sub-org.png)
-  ![image](static/public/api/docs/images/create-sub-org-result.png)
+  ![image](images/create-sub-org.png)
+  ![image](images/create-sub-org-result.png)
 Operations:
   -Create (post to the id of the parent organization)
   -Update by id (put and patch)
