@@ -1,7 +1,5 @@
-#Overview
-    The Vela public api is designed to provide a rational, unified interface for Partners to interface with the Vela system
-
-
+# Overview
+The Vela public api is designed to provide a rational, unified interface for Partners to interface with the Vela system
 
 ## Swagger
 The swagger for the Vela Public API is available at https://app.vela.care/public/api/docs/ for production and https://app.beta.alwaysreach.net/public/api/docs/ for the beta environment.  The beta environment is updated 3 weeks prior to a release to facilitate integration testing.
