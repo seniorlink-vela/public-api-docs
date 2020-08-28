@@ -1,17 +1,13 @@
 # Overview
-
-The Vela public api is designed to provide a rational, unified interface for Partners to interface with the Vela system
+    The Vela public api is designed to provide a rational, unified interface for Partners to interface with the Vela system.
 
 ## Swagger
-The swagger for the Vela Public API is available at https://app.vela.care/public/api/docs/ for production and https://app.beta.alwaysreach.net/public/api/docs/ for the beta environment.  The beta environment is updated 3 weeks prior to a release to facilitate integration testing.
+The swagger for the Vela Public API is available at [https://app.vela.care/public/api/docs/]() for production and [ https://app.beta.alwaysreach.net/public/api/docs/]() for the beta environment.  The beta environment is updated 3 weeks prior to a release to facilitate integration testing.
 
 ## Utilizing public api
-
 All endpoints require authorization -- to use the public api the caller must have the public api permission associated with their account.
 ![image](images/admin-roles.png)
-The APIs are broken up into several sections - admin for user and care team data, care data for information
-regarding the care of a specific user and the events section -- which uses queues and webhooks to inform the 
-partner of what data has been created or changed as it happens within the system.
+The APIs are broken up into several sections - admin for user and care team data, care data for information regarding the care of a specific user and the events section -- which uses queues and webhooks to inform the partner of what data has been created or changed as it happens within the system.
 
 This is a Restful api, and follows standard conventions.  A user must have the public_api permission in Vela to access it.
 
@@ -25,10 +21,10 @@ This ID is unique to your partner organization and is supplied for ease of integ
 		3) Patch the user by id
 
 ## Getting a token
-
 Vela uses an oauth style token.  The client ID is available on your organization's "Utility" page in the vela Admin application.
 ![image](images/admin-utilities.png)
 Pass the client_id, a grant_type of "password" and the username and password as form params to the endpoint and it will respond with the following:
+```json
 	{
 	  "access_token": "string",
 	  "client_id": "string",
@@ -41,14 +37,15 @@ Pass the client_id, a grant_type of "password" and the username and password as 
 	  "username": "string",
 	  "uuid": "string"
 	}
+```
 
 All other api calls (except where noted) require this oauth style token to access the resources.  So attach an `Authorization` header of type `bearer` with the access token's value to each request -- so for token value of "abcd" you would make a header of `Authorization` with the value `bearer abcd`.  The expires_in values is in seconds -- tokens at this time default to 4 hours in length (14400 seconds).
 At this time we do not expose an endpoint to refresh the token. Any request made without a valid token will return a 401 error code.
 
 ## Care teams:
-A care team is a consumer and the professional and non-professional people dedicated to their Care
+A care team is a consumer and the professional and non-professional people dedicated to their care.
 A care team has its own id - used to reference it.
-This id can be recovered by getting it by consumer -- example (have ref to consumer, get care team by consumer id, get ID from response)
+This id can be recovered by getting it by consumer -- example (have ref to consumer, get care team by consumer id, get ID from response).
 Operations:
   Removing/adding a member.
   Updating care team.
@@ -79,7 +76,6 @@ They will not be responsible for completing questionnaires during a suspension p
     Get list by user id
     Post to user id
     Update, Delete, Get (by id)
-
 
 ## Organizations:
 All organizations descend from a partner_id -- the root of your organization tree.
@@ -180,31 +176,31 @@ Otherwise, it behaves the same as the queues.
 #Appendix of Event Types
 
 
-id |                slug
+id |                slug                 |
 ----+------------------------------------
-| 1 | user-login
-| 2 | user-created
-| 3 | user-updated
-| 4 | organization-created
-| 5 | organization-updated
-| 6 | organization-deleted
-| 7 | user-suspension-created
-| 8 | user-suspension-updated
-| 9 | user-suspension-deleted
-| 10 | care-team-created
-| 11 | care-team-updated
-| 12 | private-message-sent
-| 13 | private-message-updated
-| 14 | alert-message-created
-| 15 | alert-message-updated
-| 16 | alert-message-deleted
-| 17 | questionnaire-created
-| 18 | questionnaire-updated
-| 19 | questionnaire-deleted
-| 20 | questionnaire-assignment-created
-| 21 | questionnaire-assignment-updated
-| 22 | questionnaire-assignment-deleted
-| 23 | questionnaire-assignment-submitted
+| 1 | user-login                         |
+| 2 | user-created                       |
+| 3 | user-updated                       |
+| 4 | organization-created               |
+| 5 | organization-updated               |
+| 6 | organization-deleted               |
+| 7 | user-suspension-created            |
+| 8 | user-suspension-updated            |
+| 9 | user-suspension-deleted            |
+| 10 | care-team-created                 |
+| 11 | care-team-updated                 |
+| 12 | private-message-sent              |
+| 13 | private-message-updated           |
+| 14 | alert-message-created             |
+| 15 | alert-message-updated             |
+| 16 | alert-message-deleted             |
+| 17 | questionnaire-created             |
+| 18 | questionnaire-updated             |
+| 19 | questionnaire-deleted             |
+| 20 | questionnaire-assignment-created  |
+| 21 | questionnaire-assignment-updated  |
+| 22 | questionnaire-assignment-deleted  |
+| 23 | questionnaire-assignment-submitted|
 #Structure of Each event type
 
 ## Event type 1
@@ -284,7 +280,21 @@ id |                slug
   "zip": null
 }
 ```
-## Event types 7, 8, 9, 10:
+## Event types 7, 8, 9:
+```json
+{
+   "created_at":"2019-04-25T12:45:51Z",
+   "created_by":"vela_default_f35f05ed-e103-4c27-ad47-0bbcb70f4759",
+   "description":"23 to 26 Edited",
+   "end_at":"2019-04-27T03:59:59Z",
+   "id":857,
+   "start_at":"2019-04-23T04:00:00Z",
+   "updated_at":"2019-04-25T12:46:11Z",
+   "updated_by":"vela_default_f35f05ed-e103-4c27-ad47-0bbcb70f4759",
+   "user_id":"vela_default_8a47e074-9149-432f-8e51-87a04a1c353a"
+}
+```
+## Event types 10, 11:
 ```json
 {
   "authorized_at": null,
@@ -298,46 +308,6 @@ id |                slug
   "organization_id": 4,
   "status": "created",
   "updated_at": "2019-04-24T22:11:32Z"
-}
-```
-## Event type 11:
-```json
-{
-  "authorized_at": "2019-04-24T22:19:50Z",
-  "authorized_by": "V00000091870000000004",
-  "consumer_user_id": "V00000091870000000004",
-  "created_at": "2019-04-24T22:18:59Z",
-  "created_by": "vela_default_da2161f4-246e-446f-ae38-1315dd370b11",
-  "id": 3852,
-  "member_changes": [
-    {
-      "change_type": "ADDED",
-      "user_id": "V00000091880000000004"
-    }
-  ],
-  "members": [
-    {
-      "care_circle_member_permission_group_id": 2255,
-      "designation": "Caregiver With Full Access",
-      "invited_at": null,
-      "invited_by": null,
-      "owner_type": "Caregiver",
-      "rank": "PRIMARY",
-      "relationship": null,
-      "user_id": "V00000091880000000004"
-    },
-    {
-      "invited_at": null,
-      "invited_by": null,
-      "owner_type": "CareManager",
-      "rank": "OTHER",
-      "relationship": null,
-      "user_id": "V00000091860000000004"
-    }
-  ],
-  "organization_id": 392,
-  "status": "created",
-  "updated_at": "2019-04-24T22:20:03Z"
 }
 ```
 ## Event type 12:
@@ -364,35 +334,83 @@ id |                slug
   "updated_at": "2019-04-24T15:42:52Z"
 }
 ```
-## Event types 13-20:
+## Event type 13:
 ```json
 {
-  "answers": [],
-  "associated_with_id": "IN315392213",
-  "associated_with_type": "USER",
-  "created_at": "2019-04-25T08:00:00Z",
-  "created_by": "vela_default_241a1fca-3c0b-442c-a689-4d377225c395",
-  "expire_at": "2019-05-25T08:00:00Z",
-  "expired": false,
-  "overdue": false,
-  "overdue_at": "2019-04-26T08:00:00Z",
-  "questionnaire_assignment_id": 8569468,
-  "questionnaire_assignment_schedule_id": 4,
-  "questionnaire_data_tag": null,
-  "questionnaire_id": 83,
-  "questionnaire_label": "Daily Check In",
-  "respondents": [],
-  "secondary_respondents": [],
-  "start_at": "2019-04-25T08:00:00Z",
-  "status": "NEW",
-  "submitted_at": null,
-  "submitted_by": null,
-  "updated_at": "2019-04-25T08:00:00Z",
-  "updated_by": "vela_default_241a1fca-3c0b-442c-a689-4d377225c395",
-  "watchers": []
+  "additional_data": null,
+  "attachment_id": null,
+  "chat_message_id": 979532,
+  "content": "gphcn",
+  "created_at": "2019-03-29T02:31:26Z",
+  "message_thread": {
+    "confidential": true,
+    "consumer_id": "V00007413040000083668",
+    "recipient_user_ids": [
+      "V00007413010000083668",
+      "V00007413020000083668",
+      "V00007413040000083668"
+    ]
+  },
+  "message_thread_id": 510936,
+  "message_type": "CHAT_MESSAGE",
+  "reader_type": "ALL",
+  "sender_user_id": "V00007413010000083668",
+  "status": "DELETED",
+  "updated_at": "2019-03-29T02:31:30Z"
 }
 ```
-## Event type 21:
+## Event types 14, 15, 16:
+```json
+{
+  "alert_status": "OPEN",
+  "alert_template": "PastDueQuestionnaires",
+  "alert_type": "MissedCheck",
+  "associated_object": {
+    "associated_object_internal_id": 15002523,
+    "associated_object_type": "QuestionnaireAssignment"
+  },
+  "care_team_id": {
+    "long": 10496
+  },
+  "contents": {
+    "content": "Just a gentle reminder to submit your INCIDENT for 9/18/2019 for QC. Log in to Vela at https://app.dev.alwaysreach.net\nâ€” The Vela Team",
+    "for_date": "2019-09-18",
+    "subject": "Missing INCIDENT"
+  },
+  "created_at": "2019-09-21T12:01:21Z",
+  "created_by": null,
+  "email_recipient_user_ids": [],
+  "event_timestamp": "2019-09-21T12:01:21Z",
+  "from_user_id": "V00000327050000000004",
+  "id": 13455448,
+  "notified": false,
+  "push_recipient_user_ids": [],
+  "reference_user_id": "V00000327050000000004",
+  "sms_recipient_user_ids": [],
+  "to_user_ids": [
+    "V00000323280000000004"
+  ],
+  "updated_at": "2019-09-21T12:01:21Z",
+  "updated_by": null,
+  "visible_to_non_readers": false
+}
+```
+## Event types 17, 18, 19:
+```json
+{
+  "created_at": "2019-09-15T21:54:00Z",
+  "created_by": "V00012787970000138326",
+  "data_tag": null,
+  "id": 142240,
+  "label": {
+    "en": "Questionnaire_bywejtjx_1568584440518"
+  },
+  "nodes": [],
+  "updated_at": "2019-09-15T21:54:00Z",
+  "updated_by": "V00012787970000138326"
+}
+```
+## Event types 20, 21, 22, 23:
 ```json
 {
   "answers": [
@@ -484,106 +502,6 @@ id |                slug
   "submitted_by": null,
   "updated_at": "2019-04-24T20:35:59Z",
   "updated_by": "V00000091770000000009",
-  "watchers": [
-    {
-      "watcher_id": "V00000091780000000009",
-      "watcher_type": "USER"
-    }
-  ]
-}
-```
-## Event type 23:
-```json
-{
-  "answers": [
-    {
-      "answer_internal_id": 23348,
-      "created_at": "2019-04-24T20:35:59Z",
-      "created_by": "V00000091770000000009",
-      "question": {
-        "data_tag": {
-          "string": "q4"
-        },
-        "label": "feedback",
-        "question_type": "OPEN",
-        "questionnaire_node_internal_id": 21422,
-        "text": {
-          "en": "Please let us know any feedback about your experience or how we could further improve the overall support experience"
-        }
-      },
-      "response": null,
-      "updated_at": "2019-04-24T20:35:59Z",
-      "updated_by": "V00000091770000000009"
-    },
-    {
-      "answer_internal_id": 23347,
-      "created_at": "2019-04-24T20:35:59Z",
-      "created_by": "V00000091770000000009",
-      "question": {
-        "data_tag": {
-          "string": "q3"
-        },
-        "label": "On a scale of 1-10 how likely would would you recommend Vela Support to your friends or family.\n 10 Being most likely and 1 being least likely to recommend.",
-        "question_type": "CHOICE",
-        "questionnaire_node_internal_id": 21424,
-        "text": {
-          "en": "On a scale of 1-10 how likely would would you recommend Vela Support to your friends or family.\n 10 Being most likely and 1 being least likely to recommend."
-        }
-      },
-      "response": {
-        "string": "10"
-      },
-      "updated_at": "2019-04-24T20:35:59Z",
-      "updated_by": "V00000091770000000009"
-    },
-    {
-      "answer_internal_id": 23346,
-      "created_at": "2019-04-24T20:35:59Z",
-      "created_by": "V00000091770000000009",
-      "question": {
-        "data_tag": {
-          "string": "q1"
-        },
-        "label": "Our records show that you have recently contacted Vela Support. Could you please take a couple of moments to let us know how we did?",
-        "question_type": "CHOICE",
-        "questionnaire_node_internal_id": 21421,
-        "text": {
-          "en": "Our records show that you have recently contacted Vela Support. Could you please take a couple of moments to let us know how we did?"
-        }
-      },
-      "response": {
-        "string": "ok"
-      },
-      "updated_at": "2019-04-24T20:35:59Z",
-      "updated_by": "V00000091770000000009"
-    }
-  ],
-  "associated_with_id": "V00000091760000000009",
-  "associated_with_type": "USER",
-  "created_at": "2019-04-24T20:04:57Z",
-  "created_by": "V00000000440000000009",
-  "expire_at": "2019-05-10T20:04:52Z",
-  "expired": false,
-  "overdue": false,
-  "overdue_at": null,
-  "questionnaire_assignment_id": 8569443,
-  "questionnaire_assignment_schedule_id": null,
-  "questionnaire_data_tag": null,
-  "questionnaire_id": 21419,
-  "questionnaire_label": "Support Survey",
-  "respondents": [
-    {
-      "respondent_id": "V00000091770000000009",
-      "respondent_type": "USER"
-    }
-  ],
-  "secondary_respondents": [],
-  "start_at": "2019-04-24T20:04:49Z",
-  "status": "SUBMITTED",
-  "submitted_at": "2019-04-24T20:36:00Z",
-  "submitted_by": "V00000091770000000009",
-  "updated_at": "2019-04-24T20:36:00Z",
-  "updated_by": "V00000000440000000009",
   "watchers": [
     {
       "watcher_id": "V00000091780000000009",
