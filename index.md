@@ -216,7 +216,7 @@ Otherwise, it behaves the same as the queues.
 | 22 | questionnaire-assignment-deleted   |
 | 23 | questionnaire-assignment-submitted |
 
-#Structure of Each event type
+# Structure of Each event type
 
 ## Event type 1
 
