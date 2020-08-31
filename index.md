@@ -190,32 +190,32 @@ Otherwise, it behaves the same as the queues.
 
 #Appendix of Event Types
 
+| id |                slug                |
+----+--------------------------------------
+| 1  | user-login                         |
+| 2  | user-created                       |
+| 3  | user-updated                       |
+| 4  | organization-created               |
+| 5  | organization-updated               |
+| 6  | organization-deleted               |
+| 7  | user-suspension-created            |
+| 8  | user-suspension-updated            |
+| 9  | user-suspension-deleted            |
+| 10 | care-team-created                  |
+| 11 | care-team-updated                  |
+| 12 | private-message-sent               |
+| 13 | private-message-updated            |
+| 14 | alert-message-created              |
+| 15 | alert-message-updated              |
+| 16 | alert-message-deleted              |
+| 17 | questionnaire-created              |
+| 18 | questionnaire-updated              |
+| 19 | questionnaire-deleted              |
+| 20 | questionnaire-assignment-created   |
+| 21 | questionnaire-assignment-updated   |
+| 22 | questionnaire-assignment-deleted   |
+| 23 | questionnaire-assignment-submitted |
 
-| id |                slug                 |
-----+------------------------------------
-| 1 | user-login                         |
-| 2 | user-created                       |
-| 3 | user-updated                       |
-| 4 | organization-created               |
-| 5 | organization-updated               |
-| 6 | organization-deleted               |
-| 7 | user-suspension-created            |
-| 8 | user-suspension-updated            |
-| 9 | user-suspension-deleted            |
-| 10 | care-team-created                 |
-| 11 | care-team-updated                 |
-| 12 | private-message-sent              |
-| 13 | private-message-updated           |
-| 14 | alert-message-created             |
-| 15 | alert-message-updated             |
-| 16 | alert-message-deleted             |
-| 17 | questionnaire-created             |
-| 18 | questionnaire-updated             |
-| 19 | questionnaire-deleted             |
-| 20 | questionnaire-assignment-created  |
-| 21 | questionnaire-assignment-updated  |
-| 22 | questionnaire-assignment-deleted  |
-| 23 | questionnaire-assignment-submitted|
 #Structure of Each event type
 
 ## Event type 1
