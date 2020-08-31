@@ -1,12 +1,14 @@
 # Overview
-    The Vela public api is designed to provide a rational, unified interface for Partners to interface with the Vela system.
+The Vela public api is designed to provide a rational, unified interface for Partners to interface with the Vela system.
 
 ## Swagger
 The swagger for the Vela Public API is available at [https://app.vela.care/public/api/docs/]() for production and [ https://app.beta.alwaysreach.net/public/api/docs/]() for the beta environment.  The beta environment is updated 3 weeks prior to a release to facilitate integration testing.
 
 ## Utilizing public api
 All endpoints require authorization -- to use the public api the caller must have the public api permission associated with their account.
+
 ![image](images/admin-roles.png)
+
 The APIs are broken up into several sections - admin for user and care team data, care data for information regarding the care of a specific user and the events section -- which uses queues and webhooks to inform the partner of what data has been created or changed as it happens within the system.
 
 This is a Restful api, and follows standard conventions.  A user must have the public_api permission in Vela to access it.
@@ -22,8 +24,11 @@ This ID is unique to your partner organization and is supplied for ease of integ
 
 ## Getting a token
 Vela uses an oauth style token.  The client ID is available on your organization's "Utility" page in the vela Admin application.
+
 ![image](images/admin-utilities.png)
+
 Pass the client_id, a grant_type of "password" and the username and password as form params to the endpoint and it will respond with the following:
+
 ```json
 	{
 	  "access_token": "string",
@@ -81,8 +86,11 @@ They will not be responsible for completing questionnaires during a suspension p
 All organizations descend from a partner_id -- the root of your organization tree.
 Orgs can be added anywhere in your tree or moved. Moving a parent organization moves all its children with it.
 Example of creating a sub org within an organization:
+
   ![image](images/create-sub-org.png)
+
   ![image](images/create-sub-org-result.png)
+
 Operations:
   -Create (post to the id of the parent organization)
   -Update by id (put and patch)
@@ -108,29 +116,29 @@ Usage statistics can be viewed at the "/events/usage-by-type" endpoint.
 ## Events
 The queues allow data to be pulled from the system to the partner.  The events are a time series of everything happening in vela.
 The different types of events are as follows:
-  user-login
-  user-created
-  user-updated
-  organization-created
-  organization-update
-  organization-deleted
-  user-suspension-created
-  user-suspension-updated
-  user-suspension-deleted
-  care-team-created
-  care-team-updated
-  private-message-sent
-  private-message-updated
-  alert-message-created
-  alert-message-updated
-  alert-message-deleted
-  questionnaire-created
-  questionnaire-updated
-  questionnaire-deleted
-  questionnaire-assignment-created
-  questionnaire-assignment-updated
-  questionnaire-assignment-deleted
-  questionnaire-assignment-submitted
+  user-login  
+  user-created  
+  user-updated  
+  organization-created  
+  organization-update  
+  organization-deleted  
+  user-suspension-created  
+  user-suspension-updated  
+  user-suspension-deleted  
+  care-team-created  
+  care-team-updated  
+  private-message-sent  
+  private-message-updated  
+  alert-message-created  
+  alert-message-updated  
+  alert-message-deleted  
+  questionnaire-created  
+  questionnaire-updated  
+  questionnaire-deleted  
+  questionnaire-assignment-created  
+  questionnaire-assignment-updated  
+  questionnaire-assignment-deleted  
+  questionnaire-assignment-submitted  
     A current list of event_types can be gotten from the event-types GET endpoint.
 
 ## Queues:
@@ -142,6 +150,8 @@ Set the event_types value to the ones you wish to receive - and empty array is e
 Whenever desired you can pull events from the queue using GET /api/v1/events/queue/events.
 Every queue has a watermark, when you GET from the queue it returns the next X records (for now a max of 100).
 	The get returns {
+
+  ```json{
   	"events": [
       {
         "created_at": "2020-08-07T16:37:20.182Z",
@@ -158,14 +168,19 @@ Every queue has a watermark, when you GET from the queue it returns the next X r
       ],
       "last_read_index": 0
       }
+  ```
 You receive an array of records and the last_read_index -- which is your new watermark.
 After you have received the records you should update the watermark -- to the value returned from the GET. PUT /api/v1/events/queue/watermark
 This advances the cursor in the queue.  This is done to ensure that the delivery has occurred and no records are lost, since the system only knows that the records were sent - not that they were successfully received.
 The watermark and event_types are completely under your control.  You can reset them at will.  You can rewind at will and change what event types at any time.
+
 Operations:
+
   -Return a queue for the organization of an admin or for the provided organization if the caller is a service user .
+
   -Return events of the queue for the organization of an admin or for the provided organization if the caller is a service user.
-  -Update the watermark of a queue for the organization of an admin or for the provided organization if the caller is a service user .
+
+  -Update the watermark of a queue for the organization of an admin or for the provided organization if the caller is a service user
 
 ## Webhooks:
 A webhook is similar to a queue.  Except it pushes from the server to the client, rather than the client making requests.
@@ -176,7 +191,7 @@ Otherwise, it behaves the same as the queues.
 #Appendix of Event Types
 
 
-id |                slug                 |
+| id |                slug                 |
 ----+------------------------------------
 | 1 | user-login                         |
 | 2 | user-created                       |
@@ -204,6 +219,7 @@ id |                slug                 |
 #Structure of Each event type
 
 ## Event type 1
+
 ```json
 {
   "client_application": "ADMIN_WEB",
@@ -214,6 +230,7 @@ id |                slug                 |
 }
 ```
 ## Event-types 2, 3
+
 ```json
 {
   "address_line1": null,
@@ -261,6 +278,7 @@ id |                slug                 |
 }
 ```
 ## Event types 4, 5, 6:
+
 ```json
 {
   "address_line1": null,
@@ -281,6 +299,7 @@ id |                slug                 |
 }
 ```
 ## Event types 7, 8, 9:
+
 ```json
 {
    "created_at":"2019-04-25T12:45:51Z",
@@ -311,6 +330,7 @@ id |                slug                 |
 }
 ```
 ## Event type 12:
+
 ```json
 {
   "additional_data": null,
@@ -335,6 +355,7 @@ id |                slug                 |
 }
 ```
 ## Event type 13:
+
 ```json
 {
   "additional_data": null,
@@ -360,6 +381,7 @@ id |                slug                 |
 }
 ```
 ## Event types 14, 15, 16:
+
 ```json
 {
   "alert_status": "OPEN",
@@ -396,6 +418,7 @@ id |                slug                 |
 }
 ```
 ## Event types 17, 18, 19:
+
 ```json
 {
   "created_at": "2019-09-15T21:54:00Z",
