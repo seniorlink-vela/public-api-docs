@@ -188,7 +188,7 @@ When a webhook is activated it wakes up on a timer and delivers the data to a pr
 It will continue making deliveries until its data is exhausted (or the user tells it to stop, by pre-arranged contract).
 Otherwise, it behaves the same as the queues.
 
-#Appendix of Event Types
+# Appendix of Event Types
 
 | id | slug                               |
 | ---|------------------------------------|
