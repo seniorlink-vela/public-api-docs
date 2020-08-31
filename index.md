@@ -190,8 +190,8 @@ Otherwise, it behaves the same as the queues.
 
 #Appendix of Event Types
 
-| id |                slug                |
-----+--------------------------------------
+| id | slug                               |
+| ---|------------------------------------|
 | 1  | user-login                         |
 | 2  | user-created                       |
 | 3  | user-updated                       |
