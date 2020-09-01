@@ -28,7 +28,6 @@ Vela uses an oauth style token.  The client ID is available on your organization
 ![image](images/admin-utilities.png)
 
 Pass the client_id, a grant_type of "password" and the username and password as form params to the endpoint and it will respond with the following:
-
 ```json
 	{
 	  "access_token": "string",
@@ -189,6 +188,7 @@ It will continue making deliveries until its data is exhausted (or the user tell
 Otherwise, it behaves the same as the queues.
 
 # Appendix of Event Types
+
 
 | id | slug                               |
 | ---|------------------------------------|
