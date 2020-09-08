@@ -1,10 +1,113 @@
-# Overview
+# Table Of contents
 
-The Vela public api is designed to provide a rational, unified interface for Partners to interface with the Vela system.
+- [Overview](#Overview)
+- [Swagger](#Swagger)
+- [Utilizing public api](#Utilizing public api)
+- [Getting a token](#Getting a token)
+- [Care teams](#Care teams)
+- [User profiles](#User profiles)
+- [User suspensions](#User suspensions)
+- [Organizations](#Organizations)
+- [Care data](#Care data)
+  * [Attachments](#Attachments)
+  * [Private Messages](#Private Messages)
+  * [Questionnaires](#Questionnaires)
+- [Rate Limiting](#Rate Limiting)
+- [Events](#Events)
+- [Queues](#Queues)
+- [Appendix of Event Types](#Appendix of Event Types)
+- [Structure of Each event type](#Structure of Each event type)
+  * [Event-type 1](#Event type 1)
+  * [Event-types 2, 3](#Event-types 2, 3)
+  * [Event-types 4, 5, 6](#Event-types 4, 5, 6)
+  * [Event-types 7, 8, 9](#Event-types 7, 8, 9)
+  * [Event-types 10, 11](#Event-types 10, 11)
+  * [Event-type 12](#Event-type 12)
+  * [Event-type 13](#Event-type 13)
+  * [Event-type 14, 15, 16](#Event-type 14, 15, 16)
+  * [Event-types 17, 18, 19](#Event-types 17, 18, 19)
+  * [Event-types 20, 21, 22, 23](#Event-types 20, 21, 22, 23)
 
-## Swagger
+## Getting Started
 
-The swagger for the Vela Public API is available at [https://app.vela.care/public/api/docs/](https://app.vela.care/public/api/docs/) for production and [https://app.beta.alwaysreach.net/public/api/docs/](https://app.beta.alwaysreach.net/public/api/docs/) for the beta environment.  The beta environment is updated 3 weeks prior to a release to facilitate integration testing.
+### Pre-requisites
+
+- Partner organization provisioned.
+- Vela account with Vela Admin access provisioned.
+
+The following steps will have you sending your first Vela Public API request, so let's get started.
+
+### Steps
+
+1. Log into Vela Admin at <http://app.vela.care/admin/login>
+2. Navigate to Utilities and make note of the ```Client ID```.
+3. Update your user's role with Public API permission by following these steps:
+    1. Click on Organizations.
+    2. Click on Update Roles from right menu under your Organization's details.
+    3. Select the Role for your user (if unsure then navigate to your profile and see role under your name).
+    4. Scroll down to Utilities section under the Administration tab.
+    5. Click on execute for Public API.
+    6. Click Save.
+4. To obtain your ```access_token``` from Vela's OAuth service use the cURL request below:
+
+    ```sh
+    curl -X "POST" "https://oauth.vela.care/token" \
+     -H 'Content-Type: application/x-www-form-urlencoded; charset=utf-8' \
+     --data-urlencode "grant_type=password" \
+     --data-urlencode "username=<insert-your-admin-username>" \
+     --data-urlencode "password=<insert-your-admin-password>" \
+     --data-urlencode "client_id=<insert-your-Client-ID>"
+    ```
+
+    And so on success it returns ```200 OK``` and a JSON payload like so:
+
+    ```json
+    {
+        "access_token": "string",
+        "client_id": "string",
+        "client_name": "string",
+        "email": "string",
+        "expires_in": 0,
+        "password_changed_at": "2020-08-06T18:47:09.438Z",
+        "refresh_token": "string",
+        "token_type": "string",
+        "username": "string",
+        "uuid": "string"
+    }
+    ```
+
+    Excellent! Now you got your ```access_token``` and so hold on to that as it is a building block to your first request. Some notes to keep in mind, ```expires_in``` is in seconds. (ex. 14440s is 4 hours).
+
+5. Let's build your first request. For this, you will send a [GET user-profiles](https://app.vela.care/public/api/docs/#!/admin/UserProfilesGet) request. And so the cURL looks like:
+
+    ```sh
+    curl "https://app.vela.care/public/api/v1/admin/user-profiles" \
+        -H 'Authorization: Bearer <insert-your-access-token>'
+    ```
+
+     And so on success it returns ```200 OK``` and a JSON payload like:
+
+     ```json
+        {
+            "meta": {
+                "page": 1,
+                "page_size": -1,
+                "record_count": 60,
+                "total_pages": 1
+            },
+            "user_profiles": [
+                {
+                    "address1": null,
+                    "address2": null,
+                    "city": null,
+                    "country": null,
+                    // ....
+                }
+            ]
+        }
+     ```
+
+6. Next steps: take a look at: [Swagger docs](https://app.vela.care/public/api/docs/) on all available endpoints.
 
 ## Utilizing public api
 
@@ -23,35 +126,9 @@ This ID is unique to your partner organization and is supplied for ease of integ
 
 Example of flow:
 
-  1) Get a token
-  2) Get the user by id
-  3) Patch the user by id
-
-## Getting a token
-
-Vela uses an oauth style token.  The client ID is available on your organization's "Utility" page in the vela Admin application.
-
-![image](images/admin-utilities.png)
-
-Pass the client_id, a grant_type of "password" and the username and password as form params to the endpoint and it will respond with the following:
-
-```json
-{
-    "access_token": "string",
-    "client_id": "string",
-    "client_name": "string",
-    "email": "string",
-    "expires_in": 0,
-    "password_changed_at": "2020-08-06T18:47:09.438Z",
-    "refresh_token": "string",
-    "token_type": "string",
-    "username": "string",
-    "uuid": "string"
-}
-```
-
-All other api calls (except where noted) require this oauth style token to access the resources.  So attach an `Authorization` header of type `bearer` with the access token's value to each request -- so for token value of "abcd" you would make a header of `Authorization` with the value `bearer abcd`.  The expires_in values is in seconds -- tokens at this time default to 4 hours in length (14400 seconds).
-At this time we do not expose an endpoint to refresh the token. Any request made without a valid token will return a 401 error code.
+1. Get a token  
+2. Get the user by id  
+3. Patch the user by id  
 
 ## Care teams
 
@@ -67,10 +144,12 @@ Operations:
 A user is a person who can participate in the Vela applications.
 All user manipulations are under user-profiles in the API.
 There are 4 types of users in Vela:
--Patients (consumers)
--Caregivers
--Professionals
--Administrators.  
+
+- Patients (consumers)  
+- Caregivers  
+- Professionals  
+- Administrators.  
+
 Every user is a member of an organization, and visibility of other users is controlled by the organization hierarchy.
 Create users.
 Can get by email -- which also checks username.
@@ -102,9 +181,10 @@ Example of creating a sub org within an organization:
   ![image](images/create-sub-org-result.png)
 
 Operations:
-  -Create (post to the id of the parent organization)
-  -Update by id (put and patch)
-  -List all organizations that are descendants of the id
+
+- Create (post to the id of the parent organization)  
+- Update by id (put and patch)  
+- List all organizations that are descendants of the id  
 
 ## Care data
 
@@ -197,18 +277,9 @@ The watermark and event_types are completely under your control.  You can reset 
 
 Operations:
 
-  -Return a queue for the organization of an admin or for the provided organization if the caller is a service user .
-
-  -Return events of the queue for the organization of an admin or for the provided organization if the caller is a service user.
-
-  -Update the watermark of a queue for the organization of an admin or for the provided organization if the caller is a service user
-
-## Webhooks
-
-A webhook is similar to a queue.  Except it pushes from the server to the client, rather than the client making requests.
-When a webhook is activated it wakes up on a timer and delivers the data to a predefined URL it can post to.
-It will continue making deliveries until its data is exhausted (or the user tells it to stop, by pre-arranged contract).
-Otherwise, it behaves the same as the queues.
+- Return a queue for the organization of an admin or for the provided organization if the caller is a service user.
+- Return events of the queue for the organization of an admin or for the provided organization if the caller is a service user.
+- Update the watermark of a queue for the organization of an admin or for the provided organization if the caller is a service user.
 
 ## Appendix of Event Types
 
@@ -240,7 +311,7 @@ Otherwise, it behaves the same as the queues.
 
 ## Structure of Each event type
 
-### Event type 1
+### Event-type 1
 
 ```json
 {
@@ -301,7 +372,7 @@ Otherwise, it behaves the same as the queues.
 }
 ```
 
-### Event types 4, 5, 6
+### Event-types 4, 5, 6
 
 ```json
 {
@@ -323,7 +394,7 @@ Otherwise, it behaves the same as the queues.
 }
 ```
 
-### Event types 7, 8, 9
+### Event-types 7, 8, 9
 
 ```json
 {
@@ -339,7 +410,7 @@ Otherwise, it behaves the same as the queues.
 }
 ```
 
-### Event types 10, 11
+### Event-types 10, 11
 
 ```json
 {
@@ -357,7 +428,7 @@ Otherwise, it behaves the same as the queues.
 }
 ```
 
-### Event type 12
+### Event-type 12
 
 ```json
 {
@@ -383,7 +454,7 @@ Otherwise, it behaves the same as the queues.
 }
 ```
 
-### Event type 13
+### Event-type 13
 
 ```json
 {
@@ -410,7 +481,7 @@ Otherwise, it behaves the same as the queues.
 }
 ```
 
-### Event types 14, 15, 16
+### Event-types 14, 15, 16
 
 ```json
 {
@@ -448,7 +519,7 @@ Otherwise, it behaves the same as the queues.
 }
 ```
 
-### Event types 17, 18, 19
+### Event-types 17, 18, 19
 
 ```json
 {
@@ -465,7 +536,7 @@ Otherwise, it behaves the same as the queues.
 }
 ```
 
-### Event types 20, 21, 22, 23
+### Event-types 20, 21, 22, 23
 
 ```json
 {
