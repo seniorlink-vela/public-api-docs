@@ -1,6 +1,6 @@
 # Table of Contents
 
-- [Getting Started](#Getting-Started)
+- [Getting Started](#getting-started)
 - [Utilizing public api](#Utilizing-public-api)
 - [Care teams](#Care-teams)
 - [User profiles](#User-profiles)
