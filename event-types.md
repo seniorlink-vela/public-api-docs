@@ -1,279 +1,367 @@
-# Table of Contents
+# Appendix of Event Types
 
-- [Getting Started](#getting-started)
-- [Utilizing public api](#utilizing-public-api)
-- [Care teams](#care-teams)
-- [User profiles](#user-profiles)
-- [User suspensions](#user-suspensions)
-- [Organizations](#organizations)
-- [Care data](#care-data)
-  - [Attachments](#attachments)
-  - [Private Messages](#private-messages)
-  - [Questionnaires](#questionnaires)
-- [Rate Limiting](#rate-limiting)
-- [Events](#events)
-- [Queues](#queues)
-- [Appendix of Event Types](event-types.md)
+| id | slug                               |
+| ---|------------------------------------|
+| 1  | user-login                         |
+| 2  | user-created                       |
+| 3  | user-updated                       |
+| 4  | organization-created               |
+| 5  | organization-updated               |
+| 6  | organization-deleted               |
+| 7  | user-suspension-created            |
+| 8  | user-suspension-updated            |
+| 9  | user-suspension-deleted            |
+| 10 | care-team-created                  |
+| 11 | care-team-updated                  |
+| 12 | private-message-sent               |
+| 13 | private-message-updated            |
+| 14 | alert-message-created              |
+| 15 | alert-message-updated              |
+| 16 | alert-message-deleted              |
+| 17 | questionnaire-created              |
+| 18 | questionnaire-updated              |
+| 19 | questionnaire-deleted              |
+| 20 | questionnaire-assignment-created   |
+| 21 | questionnaire-assignment-updated   |
+| 22 | questionnaire-assignment-deleted   |
+| 23 | questionnaire-assignment-submitted |
 
-## Getting Started
+## Structure of Each Event-Type
 
-### Pre-requisites
+- [Event-type 1](#event-type-1)
+- [Event-types 2, 3](#event-types-2,-3)
+- [Event-types 4, 5, 6](#event-types-4,-5,-6)
+- [Event-types 7, 8, 9](#event-types-7,-8,-9)
+- [Event-types 10, 11](#event-types-10,-11)
+- [Event-type 12](#event-type-12)
+- [Event-type 13](#event-type-13)
+- [Event-type 14, 15, 16](#event-type-14,-15,-16)
+- [Event-types 17, 18, 19](#event-types-17,-18,-19)
+- [Event-types 20, 21, 22, 23](#event-types-20,-21,-22,-23)
 
-- Partner organization provisioned.
-- Have a Vela account with Vela Admin access.
+### Event-type 1
 
-The following steps will have you sending your first Vela Public API request, so let's get started.
+  ```json
+  {
+      "client_application": "ADMIN_WEB",
+      "oauth_client_id": "14e4009f-f761-4d44-9ee3-5caacada6dc6.vela.care",
+      "recorded_at": "2019-04-24T15:15:39Z",
+      "user_id": "vela_default_347",
+      "username": "beta_cm"
+  }
+  ```
 
-### Steps
+### Event-types 2, 3
 
-1. Log into Vela Admin at <http://app.vela.care/admin/login>
-2. Navigate to Utilities and make note of the ```Client ID```.
-3. Update your user's role with Public API permission by following these steps:
-    1. Click on Organizations.
-    2. Click on Update Roles from right menu under your Organization's details.
-    3. Select the Role for your user (if unsure then navigate to your profile and see role under your name).
-    4. Scroll down to Utilities section under the Administration tab.
-    5. Click on execute for Public API.
-    6. Click Save.
-4. To obtain your ```access_token``` from Vela's OAuth service use the cURL request below:
+  ```json
+  {
+      "address_line1": null,
+      "address_line2": null,
+      "address_line3": null,
+      "address_line4": null,
+      "address_line5": null,
+      "address_line6": null,
+      "archived_at": null,
+      "archived_by": null,
+      "birthday": null,
+      "city": null,
+      "country": null,
+      "created_at": "2019-04-24T17:51:03Z",
+      "created_by": "V00000000010000000001",
+      "disabled_at": null,
+      "disenrolled_at": "3016-03-25T00:00:00Z",
+      "email": "zzzzz+whynoput@gmail.com",
+      "enrolled_at": "2019-04-24T17:50:01Z",
+      "extended_properties": null,
+      "first_name": "mike",
+      "first_sign_in_at": null,
+      "gender": "UNSPECIFIED",
+      "id": "V00000091790000000001",
+      "language": "en",
+      "last_name": "example-ppe",
+      "middle_name": null,
+      "needs_onboarding": false,
+      "organization_id": 1,
+      "partner_id": 1,
+      "primary_phone_number": "1115551212",
+      "second_email": null,
+      "secondary_phone_number": null,
+      "state": null,
+      "tertiary_phone_number": null,
+      "timezone": "America/New_York",
+      "updated_at": "2019-04-24T17:51:03Z",
+      "updated_by": "V00000000010000000001",
+      "user_type_category": "ADMIN",
+      "user_type_id": 105,
+      "user_type_name": "Admin",
+      "username": "zzzzz+whynoput@gmail.com",
+      "uuid": "eddc81ed-f5f5-4afe-91cd-2e595da922b8",
+      "zip": null
+  }
+  ```
 
-    ```sh
-    curl -X "POST" "https://oauth.vela.care/token" \
-     -H 'Content-Type: application/x-www-form-urlencoded; charset=utf-8' \
-     --data-urlencode "grant_type=password" \
-     --data-urlencode "username=<insert-your-admin-username>" \
-     --data-urlencode "password=<insert-your-admin-password>" \
-     --data-urlencode "client_id=<insert-your-Client-ID>"
-    ```
+### Event-types 4, 5, 6
 
-    And so on success it returns ```200 OK``` and a JSON payload structured as:
+  ```json
+  {
+      "address_line1": null,
+      "address_line2": null,
+      "city": null,
+      "created_at": "2019-04-24T22:10:18Z",
+      "created_by": "vela_default_da2161f4-246e-446f-ae38-1315dd370b11",
+      "email": null,
+      "id": 392,
+      "name": "Chewbacca",
+      "parent_id": 83,
+      "partner_id": 4,
+      "phone_number": null,
+      "state": null,
+      "updated_at": "2019-04-24T22:10:18Z",
+      "updated_by": "vela_default_da2161f4-246e-446f-ae38-1315dd370b11",
+      "zip": null
+  }
+  ```
 
-    ```json
-    {
-        "access_token": "string",
-        "client_id": "string",
-        "client_name": "string",
-        "email": "string",
-        "expires_in": 0,
-        "password_changed_at": "2020-08-06T18:47:09.438Z",
-        "refresh_token": "string",
-        "token_type": "string",
-        "username": "string",
-        "uuid": "string"
-    }
-    ```
+### Event-types 7, 8, 9
 
-    Excellent! Now you got your ```access_token``` and so hold onto that as it is a building block to your first request. Some notes to keep in mind, ```expires_in``` is in seconds. (ex. 14440s is 4 hours).
+  ```json
+  {
+      "created_at": "2019-04-25T12:45:51Z",
+      "created_by": "vela_default_f35f05ed-e103-4c27-ad47-0bbcb70f4759",
+      "description": "23 to 26 Edited",
+      "end_at": "2019-04-27T03:59:59Z",
+      "id": 857,
+      "start_at": "2019-04-23T04:00:00Z",
+      "updated_at": "2019-04-25T12:46:11Z",
+      "updated_by": "vela_default_f35f05ed-e103-4c27-ad47-0bbcb70f4759",
+      "user_id": "vela_default_8a47e074-9149-432f-8e51-87a04a1c353a"
+  }
+  ```
 
-5. Let's build your first request. For this, you will send a [GET user-profiles](https://app.vela.care/public/api/docs/#!/admin/UserProfilesGet) request. And so the cURL looks like:
+### Event-types 10, 11
 
-    ```sh
-    curl "https://app.vela.care/public/api/v1/admin/user-profiles" \
-        -H 'Authorization: Bearer <insert-your-access-token>'
-    ```
+  ```json
+  {
+      "authorized_at": null,
+      "authorized_by": null,
+      "consumer_user_id": "V00000091830000000004",
+      "created_at": "2019-04-24T22:11:32Z",
+      "created_by": "vela_default_da2161f4-246e-446f-ae38-1315dd370b11",
+      "id": 3850,
+      "member_changes": null,
+      "members": [],
+      "organization_id": 4,
+      "status": "created",
+      "updated_at": "2019-04-24T22:11:32Z"
+  }
+  ```
 
-     And so on success it returns ```200 OK``` and a JSON payload structured as:
+### Event-type 12
 
-     ```json
-        {
-            "meta": {
-                "page": 1,
-                "page_size": -1,
-                "record_count": 60,
-                "total_pages": 1
-            },
-            "user_profiles": [
-                {
-                    "address1": null,
-                    "address2": null,
-                    "city": null,
-                    "country": null,
-                    // ....
-                }
-            ]
-        }
-     ```
+  ```json
+  {
+      "additional_data": null,
+      "attachment_id": null,
+      "chat_message_id": 21556,
+      "content": "hello",
+      "created_at": "2019-04-24T15:42:52Z",
+      "message_thread": {
+          "confidential": true,
+          "consumer_id": "vela_default_8a47e074-9149-432f-8e51-87a04a1c353a",
+          "recipient_user_ids": [
+              "vela_default_347",
+              "vela_default_390a1fce-6567-408d-99e1-094575a64d8b"
+          ]
+      },
+      "message_thread_id": 8005,
+      "message_type": "CHAT_MESSAGE",
+      "reader_type": "ALL",
+      "sender_user_id": "vela_default_390a1fce-6567-408d-99e1-094575a64d8b",
+      "status": "ACTIVE",
+      "updated_at": "2019-04-24T15:42:52Z"
+  }
+  ```
 
-6. Visit Vela Public API's [Swagger docs](https://app.vela.care/public/api/docs/) to see all currently available endpoints.
+### Event-type 13
 
-## Utilizing public api
+  ```json
+  {
+      "additional_data": null,
+      "attachment_id": null,
+      "chat_message_id": 979532,
+      "content": "gphcn",
+      "created_at": "2019-03-29T02:31:26Z",
+      "message_thread": {
+          "confidential": true,
+          "consumer_id": "V00007413040000083668",
+          "recipient_user_ids": [
+              "V00007413010000083668",
+              "V00007413020000083668",
+              "V00007413040000083668"
+          ]
+      },
+      "message_thread_id": 510936,
+      "message_type": "CHAT_MESSAGE",
+      "reader_type": "ALL",
+      "sender_user_id": "V00007413010000083668",
+      "status": "DELETED",
+      "updated_at": "2019-03-29T02:31:30Z"
+  }
+  ```
 
-All endpoints require authorization -- to use the public api the caller must have the public api permission associated with their account.
+### Event-types 14, 15, 16
 
-![image](static/public/api/docs/images/admin-roles.png)
+  ```json
+  {
+      "alert_status": "OPEN",
+      "alert_template": "PastDueQuestionnaires",
+      "alert_type": "MissedCheck",
+      "associated_object": {
+          "associated_object_internal_id": 15002523,
+          "associated_object_type": "QuestionnaireAssignment"
+      },
+      "care_team_id": {
+          "long": 10496
+      },
+      "contents": {
+          "content": "Just a gentle reminder to submit your INCIDENT for 9/18/2019 for QC. Log in to Vela at https://app.vela.care\nâ€” The Vela Team",
+          "for_date": "2019-09-18",
+          "subject": "Missing INCIDENT"
+      },
+      "created_at": "2019-09-21T12:01:21Z",
+      "created_by": null,
+      "email_recipient_user_ids": [],
+      "event_timestamp": "2019-09-21T12:01:21Z",
+      "from_user_id": "V00000327050000000004",
+      "id": 13455448,
+      "notified": false,
+      "push_recipient_user_ids": [],
+      "reference_user_id": "V00000327050000000004",
+      "sms_recipient_user_ids": [],
+      "to_user_ids": [
+          "V00000323280000000004"
+      ],
+      "updated_at": "2019-09-21T12:01:21Z",
+      "updated_by": null,
+      "visible_to_non_readers": false
+  }
+  ```
 
-The APIs are broken up into several sections - admin for user, organization, and care team data, care data for information regarding the care of a specific user, as well as data about communication between users, and the events section -- which uses queues and webhooks to inform the partner of what data has been created or changed as it happens within the system.
+### Event-types 17, 18, 19
 
-This is a Restful api, and follows standard conventions.  A user must have the public_api permission in Vela to access it.
+  ```json
+  {
+      "created_at": "2019-09-15T21:54:00Z",
+      "created_by": "V00012787970000138326",
+      "data_tag": null,
+      "id": 142240,
+      "label": {
+          "en": "Questionnaire_bywejtjx_1568584440518"
+      },
+      "nodes": [],
+      "updated_at": "2019-09-15T21:54:00Z",
+      "updated_by": "V00012787970000138326"
+  }
+  ```
 
-With the exception of the authorize endpoint, all endpoints require a valid authorization bearer token in the header and take in request data that is content-type "application/json". Operations can be performed against all of them.
+### Event-types 20, 21, 22, 23
 
-Operations against an existing user profile require the id parameter.  This ID is the reference ID provided to Vela when the record is created, not the internal id to Vela. If a reference ID was not supplied, Vela generated one that is unique to your partner organization and is supplied for ease of integration.
-
-This ID is unique to your partner organization and is supplied for ease of integration. This ID is also viewable in the admin UI as the â€œExternal Reference IDâ€.
-
-Example of flow:
-
-1. Get a token  
-2. Get the user by id or email address
-3. Patch the user by id  
-
-## Care teams
-
-A care team is a care recipient and the professional and non-professional users dedicated to their care.
-A care team has its own id used to reference it.
-The care teamâ€™s ID can be recovered via the /api/v1/admin/care-teams/consumer/{consumer_user_id} endpoint, (where consumer_user_id is the reference ID); the â€œidâ€ returned is the ID of the care team that the care recipient/consumer belongs to.
-
-Operations:
-  Fetch all care teams.
-  Authorize a care team.
-  Add or update a care team member.
-  Remove (delete) a member of a care team.
-
-Typical operation for creating a care team: Create a care recipient. GET the care team via the care recipientâ€™s â€œIDâ€ (external reference ID). Add other users to the care team via POSTing new members to it. Authorize the care team, unless itâ€™s intended that the care recipient will log in and do so.
-
-No non-admin user can operate on a care team until the care team has been authorized via the API or by the care recipient when they log in for the first time. You never need to create a care team. Creating a care recipient creates a care team around them.
-
-## User profiles
-
-A user is a person who exists in the Vela applications.
-All user manipulations are under user-profiles in the API.
-There are 4 categories of users in Vela:
-
-- Care recipients (Patients, Members, etcâ€¦)
-- Caregivers  
-- Professionals  
-- Administrators.  
-
-Every user is a member of an organization, and visibility of other users is controlled by the organization hierarchy.
-Operations:
-  GET a list of users.
-  GET an individual user via external reference ID, email, or username.
-  Create users.
-  GET /api/v1/admin/user-profiles/by-reference/email/{user_email} accepts either an email address or username via the â€˜user_emailâ€™ parameter.
-  Update a userâ€™s ID via PUT or PATCH by providing their current ID (External reference ID) in the â€œidâ€ field and supplying the new id (external reference ID) in the body of the call.
-
-## User suspensions
-
-Putting a user on suspension is like a temporary disenrollment from the program. Descriptively, suspensions are called "pauses" in the admin UI.
-Any questionnaire assignments with a start date that falls between the start date and end date of a suspension will be invisible to caregivers and care recipients, and will show up to professional users as â€˜suspendedâ€™. The typical use case for this is when questionnaires are assigned on some schedule (daily, weekly, etc.) and there is an operational reason why those periodic questionnaires shouldnâ€™t be seen during that time. As an example, if a caregiver is caring for a care recipient, and the care recipient is hospitalized; during that hospitalization period, the questionnaire assignments asking the caregiver for how the care recipient is doing on that day or what services the caregiver may have rendered wouldnâ€™t be appropriate.
-They will not be responsible for completing questionnaires during a suspension period.
-A suspension requires a start date, but the end date is optional; if not provided the suspension will start at the start time and continue on indefinitely; this is helpful when, for example, the duration of the care recipientâ€™s hospital stay is not yet known, and can be added once it is.
-  All operations to modify one require the id of the suspension.
-  Operations:
-    Creations of suspensions are on the care recipient - and an id will be returned.
-    GET list by user id.
-    POST to user id.
-    Update (PATCH and PUT), Delete, Get (by id).
-
-## Organizations
-
-All organizations descend from a partner_id -- the root of your organization tree.
-Orgs can be added anywhere in your tree or moved. Moving a parent organization moves all its children with it.
-Example of creating a sub org within an organization via the admin UI:
-
-  ![image](static/public/api/docs/images/create-sub-org.png)
-
-  ![image](static/public/api/docs/images/create-sub-org-result.png)
-
-Operations:
-
-- Create (POST to the id of the parent organization).
-- Update by id (PUT and PATCH).
-- List all organizations that are descendants of the id (GET).
-- GET an individual org by ID.
-
-## Care data
-
-This is all data specific to a care team - its messaging, and questionnaires related to patient care.
-
-### Attachments
-
-  Can be uploaded (post), the information about them can be returned (get) and the attachment itself can be downloaded with the download endpoint - the get returns information about the attachment, the download returns the attachment itself
-
-### Private Messages
-
-  The post to private messages allows allows the user to send a message to a group of users on a care team.  The focus_id identifies the patient the message is about.  If the team_chat is set to true it uses a team channel on the foc_id's care team.
-  Otherwise it finds or builds a chat to the members of the to_list - in a chat for the focus_id.  An existing chat channel will be used if one exists - otherwise a new one will be built.
-  The get endpoint gets any message that fits the parameters supplied - for a given user (required), and for a date interval, the chat logs are searched for any message that matches the criteria.
-
-### Questionnaires
-
-  The submission by id endpoint gets one submitted questionnaire that matches the id.  The GET endpoint returns any questionnaire for the required user that fits the criteria.
-
-## Rate Limiting
-
-Access to the vela APIs is rate limited by a simple leaky bucket algorithm with a shared key so multiple server instances share the same counter.
-If you have exceeded your allotment, a 429 error can be returned from any endpoint.
-Usage statistics can be viewed at the "/events/usage-by-type" endpoint.
-
-## Events
-
-The queues allow data to be pulled from the system to the partner.  The events are a time series of everything happening in vela.
-The different types of events are as follows:
-  user-login  
-  user-created  
-  user-updated  
-  organization-created  
-  organization-update  
-  organization-deleted  
-  user-suspension-created  
-  user-suspension-updated  
-  user-suspension-deleted  
-  care-team-created  
-  care-team-updated  
-  private-message-sent  
-  private-message-updated  
-  alert-message-created  
-  alert-message-updated  
-  alert-message-deleted  
-  questionnaire-created  
-  questionnaire-updated  
-  questionnaire-deleted  
-  questionnaire-assignment-created  
-  questionnaire-assignment-updated  
-  questionnaire-assignment-deleted  
-  questionnaire-assignment-submitted  
-    A current list of event_types can be gotten from the event-types GET endpoint.
-
-## Queues
-
-A queue is defined for you at each partner organization.  It can be edited with the patch endpoint -- and the events types desired.
-The default is to receive them all.
-Information can be received about the queue by calling the get endpoint.
-It can be updated with the patch endpoint.
-Set the event_types value to the ones you wish to receive - and empty array is every event by default.
-Whenever desired you can pull events from the queue using GET /api/v1/events/queue/events.
-Every queue has a watermark, when you GET from the queue it returns the next X records (for now a max of 100).
-The get returns {
-
-```json
-{
-    "events": [
-        {
-            "created_at": "2020-08-07T16:37:20.182Z",
-            "event_type": "string",
-            "event_type_id": 0,
-            "id": 0,
-            "message_source": "string",
-            "message_timestamp": "2020-08-07T16:37:20.182Z",
-            "message_uuid": "string",
-            "organization_id": 0,
-            "partner_id": 0,
-            "payload": {}
-        }
-    ],
-    "last_read_index": 0
-}
-```
-
-You receive an array of records and the last_read_index -- which is your new watermark.
-After you have received the records you should update the watermark -- to the value returned from the GET. PUT /api/v1/events/queue/watermark
-This advances the cursor in the queue.  This is done to ensure that the delivery has occurred and no records are lost, since the system only knows that the records were sent - not that they were successfully received.
-The watermark and event_types are completely under your control.  You can reset them at will.  You can rewind at will and change what event types at any time.
-
-Operations:
-
-- Return a queue for the organization of an admin or for the provided organization if the caller is a service user.
-- Return events of the queue for the organization of an admin or for the provided organization if the caller is a service user.
-- Update the watermark of a queue for the organization of an admin or for the provided organization if the caller is a service user.
+  ```json
+  {
+      "answers": [
+          {
+              "answer_internal_id": 23348,
+              "created_at": "2019-04-24T20:35:59Z",
+              "created_by": "V00000091770000000009",
+              "question": {
+                  "data_tag": {
+                      "string": "q4"
+                  },
+                  "label": "feedback",
+                  "question_type": "OPEN",
+                  "questionnaire_node_internal_id": 21422,
+                  "text": {
+                      "en": "Please let us know any feedback about your experience or how we could further improve the overall support experience"
+                  }
+              },
+              "response": null,
+              "updated_at": "2019-04-24T20:35:59Z",
+              "updated_by": "V00000091770000000009"
+          },
+          {
+              "answer_internal_id": 23347,
+              "created_at": "2019-04-24T20:35:59Z",
+              "created_by": "V00000091770000000009",
+              "question": {
+                  "data_tag": {
+                      "string": "q3"
+                  },
+                  "label": "On a scale of 1-10 how likely would would you recommend Vela Support to your friends or family.\n 10 Being most likely and 1 being least likely to recommend.",
+                  "question_type": "CHOICE",
+                  "questionnaire_node_internal_id": 21424,
+                  "text": {
+                      "en": "On a scale of 1-10 how likely would would you recommend Vela Support to your friends or family.\n 10 Being most likely and 1 being least likely to recommend."
+                  }
+              },
+              "response": {
+                  "string": "10"
+              },
+              "updated_at": "2019-04-24T20:35:59Z",
+              "updated_by": "V00000091770000000009"
+          },
+          {
+              "answer_internal_id": 23346,
+              "created_at": "2019-04-24T20:35:59Z",
+              "created_by": "V00000091770000000009",
+              "question": {
+                  "data_tag": {
+                      "string": "q1"
+                  },
+                  "label": "Our records show that you have recently contacted Vela Support. Could you please take a couple of moments to let us know how we did?",
+                  "question_type": "CHOICE",
+                  "questionnaire_node_internal_id": 21421,
+                  "text": {
+                      "en": "Our records show that you have recently contacted Vela Support. Could you please take a couple of moments to let us know how we did?"
+                  }
+              },
+              "response": {
+                  "string": "ok"
+              },
+              "updated_at": "2019-04-24T20:35:59Z",
+              "updated_by": "V00000091770000000009"
+          }
+      ],
+      "associated_with_id": "V00000091760000000009",
+      "associated_with_type": "USER",
+      "created_at": "2019-04-24T20:04:57Z",
+      "created_by": "V00000000440000000009",
+      "expire_at": "2019-05-10T20:04:52Z",
+      "expired": false,
+      "overdue": false,
+      "overdue_at": null,
+      "questionnaire_assignment_id": 8569443,
+      "questionnaire_assignment_schedule_id": null,
+      "questionnaire_data_tag": null,
+      "questionnaire_id": 21419,
+      "questionnaire_label": "Support Survey",
+      "respondents": [
+          {
+              "respondent_id": "V00000091770000000009",
+              "respondent_type": "USER"
+          }
+      ],
+      "secondary_respondents": [],
+      "start_at": "2019-04-24T20:04:49Z",
+      "status": "STARTED",
+      "submitted_at": null,
+      "submitted_by": null,
+      "updated_at": "2019-04-24T20:35:59Z",
+      "updated_by": "V00000091770000000009",
+      "watchers": [
+          {
+              "watcher_id": "V00000091780000000009",
+              "watcher_type": "USER"
+          }
+      ]
+  }
+  ```
