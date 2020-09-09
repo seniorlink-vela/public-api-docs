@@ -29,15 +29,15 @@
 ## Structure of Each Event-Type
 
 - [Event-type 1](#event-type-1)
-- [Event-types 2, 3](#event-types-2,-3)
-- [Event-types 4, 5, 6](#event-types-4,-5,-6)
-- [Event-types 7, 8, 9](#event-types-7,-8,-9)
-- [Event-types 10, 11](#event-types-10,-11)
+- [Event-types 2, 3](#event-types-2-3)
+- [Event-types 4, 5, 6](#event-types-4-5-6)
+- [Event-types 7, 8, 9](#event-types-7-8-9)
+- [Event-types 10, 11](#event-types-10-11)
 - [Event-type 12](#event-type-12)
 - [Event-type 13](#event-type-13)
-- [Event-type 14, 15, 16](#event-type-14,-15,-16)
-- [Event-types 17, 18, 19](#event-types-17,-18,-19)
-- [Event-types 20, 21, 22, 23](#event-types-20,-21,-22,-23)
+- [Event-type 14, 15, 16](#event-type-14-15-16)
+- [Event-types 17, 18, 19](#event-types-17-18-19)
+- [Event-types 20, 21, 22, 23](#event-types-20-21-22-23)
 
 ### Event-type 1
 
@@ -51,7 +51,7 @@
   }
   ```
 
-### Event-types 2, 3
+### Event-types 2-3
 
   ```json
   {
@@ -100,7 +100,7 @@
   }
   ```
 
-### Event-types 4, 5, 6
+### Event-types 4-5-6
 
   ```json
   {
@@ -122,7 +122,7 @@
   }
   ```
 
-### Event-types 7, 8, 9
+### Event-types 7-8-9
 
   ```json
   {
@@ -138,7 +138,7 @@
   }
   ```
 
-### Event-types 10, 11
+### Event-types 10-11
 
   ```json
   {
@@ -209,7 +209,7 @@
   }
   ```
 
-### Event-types 14, 15, 16
+### Event-types 14-15-16
 
   ```json
   {
@@ -247,7 +247,7 @@
   }
   ```
 
-### Event-types 17, 18, 19
+### Event-types 17-18-19
 
   ```json
   {
@@ -264,7 +264,7 @@
   }
   ```
 
-### Event-types 20, 21, 22, 23
+### Event-types 20-21-22-23
 
   ```json
   {
