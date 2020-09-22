@@ -27,14 +27,14 @@ The following steps will have you sending your first Vela Public API request, so
 ### Steps
 
 1. Log into Vela Admin at <http://app.vela.care/admin/login>
-2. Navigate to Utilities and make note of the ```Client ID```.
-3. Update your user's role with Public API permission by following these steps:
+2. Update your user's role with Public API permission by following these steps:
     1. Click on Organizations.
     2. Click on Update Roles from right menu under your Organization's details.
     3. Select the Role for your user (if unsure then navigate to your profile and see role under your name).
     4. Scroll down to Utilities section under the Administration tab.
     5. Click on execute for Public API.
     6. Click Save.
+3. Navigate to Utilities and make note of the ```Client ID```.
 4. To obtain your ```access_token``` from Vela's OAuth service use the cURL request below:
 
     ```sh
@@ -106,11 +106,9 @@ The APIs are broken up into several sections - admin for user, organization, and
 
 This is a Restful api, and follows standard conventions.  A user must have the public_api permission in Vela to access it.
 
-With the exception of the authorize endpoint, all endpoints require a valid authorization bearer token in the header and take in request data that is content-type "application/json". Operations can be performed against all of them.
+With the exception of the authentication endpoint, all endpoints require a valid authorization bearer token in the header and take in request data that is content-type "application/json". Operations can be performed against all of them.
 
-Operations against an existing user profile require the id parameter.  This ID is the reference ID provided to Vela when the record is created, not the internal id to Vela. If a reference ID was not supplied, Vela generated one that is unique to your partner organization and is supplied for ease of integration.
-
-This ID is unique to your partner organization and is supplied for ease of integration. This ID is also viewable in the admin UI as the â€œExternal Reference IDâ€.
+Operations against an existing user profile require the id parameter.  This ID is the reference ID provided to Vela when the record is created, not the internal id to Vela. If a reference ID was not supplied, Vela generated one that is unique to your partner organization and is supplied for ease of integration. This ID is also viewable in the admin UI as the "External Reference ID".
 
 Example of flow:
 
@@ -118,23 +116,28 @@ Example of flow:
 2. Get the user by id or email address
 3. Patch the user by id  
 
-## Care teams
+## Admin
+
+This is all information related to the admin user experience.
+
+### Care teams
 
 A care team is a care recipient and the professional and non-professional users dedicated to their care.
 A care team has its own id used to reference it.
-The care teamâ€™s ID can be recovered via the /api/v1/admin/care-teams/consumer/{consumer_user_id} endpoint, (where consumer_user_id is the reference ID); the â€œidâ€ returned is the ID of the care team that the care recipient/consumer belongs to.
+The care team's ID can be recovered via the /api/v1/admin/care-teams/consumer/{consumer_user_id} endpoint, (where consumer_user_id is the reference ID); the "id" returned is the ID of the care team that the care recipient/consumer belongs to.
 
 Operations:
-  Fetch all care teams.
-  Authorize a care team.
-  Add or update a care team member.
-  Remove (delete) a member of a care team.
 
-Typical operation for creating a care team: Create a care recipient. GET the care team via the care recipientâ€™s â€œIDâ€ (external reference ID). Add other users to the care team via POSTing new members to it. Authorize the care team, unless itâ€™s intended that the care recipient will log in and do so.
+- Fetch all care teams.
+- Authorize a care team.
+- Add or update a care team member.
+- Remove (delete) a member of a care team.
+
+Typical operation for creating a care team: Create a care recipient. GET the care team via the care recipient's "ID" (external reference ID). Add other users to the care team via POSTing new members to it. Authorize the care team, unless it's intended that the care recipient will log in and do so.
 
 No non-admin user can operate on a care team until the care team has been authorized via the API or by the care recipient when they log in for the first time. You never need to create a care team. Creating a care recipient creates a care team around them.
 
-## User profiles
+### User profiles
 
 A user is a person who exists in the Vela applications.
 All user manipulations are under user-profiles in the API.
@@ -150,23 +153,23 @@ Operations:
   GET a list of users.
   GET an individual user via external reference ID, email, or username.
   Create users.
-  GET /api/v1/admin/user-profiles/by-reference/email/{user_email} accepts either an email address or username via the â€˜user_emailâ€™ parameter.
-  Update a userâ€™s ID via PUT or PATCH by providing their current ID (External reference ID) in the â€œidâ€ field and supplying the new id (external reference ID) in the body of the call.
+  GET /api/v1/admin/user-profiles/by-reference/email/{user_email} accepts either an email address or username via the 'user_email' parameter.
+  Update a user's ID via PUT or PATCH by providing their current ID (External reference ID) in the â€œidâ€ field and supplying the new id (external reference ID) in the body of the call.
 
-## User suspensions
+### User suspensions
 
 Putting a user on suspension is like a temporary disenrollment from the program. Descriptively, suspensions are called "pauses" in the admin UI.
-Any questionnaire assignments with a start date that falls between the start date and end date of a suspension will be invisible to caregivers and care recipients, and will show up to professional users as â€˜suspendedâ€™. The typical use case for this is when questionnaires are assigned on some schedule (daily, weekly, etc.) and there is an operational reason why those periodic questionnaires shouldnâ€™t be seen during that time. As an example, if a caregiver is caring for a care recipient, and the care recipient is hospitalized; during that hospitalization period, the questionnaire assignments asking the caregiver for how the care recipient is doing on that day or what services the caregiver may have rendered wouldnâ€™t be appropriate.
-They will not be responsible for completing questionnaires during a suspension period.
-A suspension requires a start date, but the end date is optional; if not provided the suspension will start at the start time and continue on indefinitely; this is helpful when, for example, the duration of the care recipientâ€™s hospital stay is not yet known, and can be added once it is.
+Any questionnaire assignments with a start date that falls between the start date and end date of a suspension will be invisible to caregivers and care recipients, and will show up to professional users as 'suspended'. The typical use case for this is when questionnaires are assigned on some schedule (daily, weekly, etc.) and there is an operational reason why those periodic questionnaires shouldn't be seen during that time. As an example, if a caregiver is caring for a care recipient, and the care recipient is hospitalized; during that hospitalization period, the questionnaire assignments asking the caregiver for how the care recipient is doing on that day or what services the caregiver may have rendered wouldn't be appropriate. They will not be responsible for completing questionnaires during a suspension period.
+
+A suspension requires a start date, but the end date is optional; if not provided the suspension will start at the start time and continue on indefinitely; this is helpful when, for example, the duration of the care recipient's hospital stay is not yet known, and can be added once it is.
   All operations to modify one require the id of the suspension.
   Operations:
-    Creations of suspensions are on the care recipient - and an id will be returned.
-    GET list by user id.
-    POST to user id.
-    Update (PATCH and PUT), Delete, Get (by id).
 
-## Organizations
+  - GET list by user id.
+  - POST to user id.
+  - Update (PUT), DELETE, GET (by id).
+
+### Organizations
 
 All organizations descend from a partner_id -- the root of your organization tree.
 Orgs can be added anywhere in your tree or moved. Moving a parent organization moves all its children with it.
@@ -189,17 +192,33 @@ This is all data specific to a care team - its messaging, and questionnaires rel
 
 ### Attachments
 
-  Can be uploaded (post), the information about them can be returned (get) and the attachment itself can be downloaded with the download endpoint - the get returns information about the attachment, the download returns the attachment itself
+Operations:
+
+- Create (POST an attachment and share with care teams).
+- Get an attachment by ID.
+- GET (Download the content of an attachment).
 
 ### Private Messages
 
-  The post to private messages allows allows the user to send a message to a group of users on a care team.  The focus_id identifies the patient the message is about.  If the team_chat is set to true it uses a team channel on the foc_id's care team.
-  Otherwise it finds or builds a chat to the members of the to_list - in a chat for the focus_id.  An existing chat channel will be used if one exists - otherwise a new one will be built.
-  The get endpoint gets any message that fits the parameters supplied - for a given user (required), and for a date interval, the chat logs are searched for any message that matches the criteria.
+The post to private messages allows allows the user to send a message to a group of users on a care team.  The focus_id identifies the patient the message is about.  If the team_chat is set to true it uses a team channel on the foc_id's care team.
+Otherwise it finds or builds a chat to the members of the to_list - in a chat for the focus_id.  An existing chat channel will be used if one exists - otherwise a new one will be built.
+The get endpoint gets any message that fits the parameters supplied - for a given user (required), and for a date interval, the chat logs are searched for any message that matches the criteria.
+
+Operations:
+
+- Create(POST a private message to a user from a provider on the care team).
+- GET private messages sent to a user and/or in a message thread.
 
 ### Questionnaires
 
-  The submission by id endpoint gets one submitted questionnaire that matches the id.  The GET endpoint returns any questionnaire for the required user that fits the criteria.
+The submission by id endpoint gets one submitted questionnaire that matches the id.  The GET endpoint returns any questionnaire for the required user that fits the criteria.
+
+Operations:
+
+- Create(POST Questionnaire assignment).
+- GET questionnaire assignment list.
+- Get a questionnaire submission by id.
+- Get a list of questionnaires for this user.
 
 ## Rate Limiting
 
