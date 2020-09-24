@@ -143,7 +143,7 @@ A user is a person who exists in the Vela applications.
 All user manipulations are under user-profiles in the API.
 There are 4 categories of users in Vela:
 
-- Care recipients (Patients, Members, etcâ€¦)
+- Care recipients (Patients, Members, etc)
 - Caregivers  
 - Professionals  
 - Administrators.  
@@ -154,7 +154,7 @@ Operations:
   GET an individual user via external reference ID, email, or username.
   Create users.
   GET /api/v1/admin/user-profiles/by-reference/email/{user_email} accepts either an email address or username via the 'user_email' parameter.
-  Update a user's ID via PUT or PATCH by providing their current ID (External reference ID) in the â€œidâ€ field and supplying the new id (external reference ID) in the body of the call.
+  Update a user's ID via PUT or PATCH by providing their current ID (External reference ID) in the "id" field and supplying the new id (external reference ID) in the body of the call.
 
 ### User suspensions
 
