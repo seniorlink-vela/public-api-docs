@@ -38,15 +38,15 @@ The following steps will have you sending your first Vela Public API request, so
 4. To obtain your ```access_token``` from Vela's OAuth service use the cURL request below:
 
     ```sh
-    curl -X "POST" "https://oauth.vela.care/token" \
-     -H 'Content-Type: application/x-www-form-urlencoded; charset=utf-8' \
+    curl -X "POST" 'https://oauth.vela.care/public/authentication/token' \
+     -H 'Content-Type: application/x-www-form-urlencoded' \
      --data-urlencode "grant_type=password" \
      --data-urlencode "username=<insert-your-admin-username>" \
      --data-urlencode "password=<insert-your-admin-password>" \
      --data-urlencode "client_id=<insert-your-Client-ID>"
     ```
 
-    And so on success it returns ```200 OK``` and a JSON payload structured as:
+    Client_secret is optional. And so on success it returns ```200 OK``` and a JSON payload structured as:
 
     ```json
     {
@@ -132,6 +132,7 @@ Operations:
 - Authorize a care team.
 - Add or update a care team member.
 - Remove (delete) a member of a care team.
+- Get a care team for the provided consumer user id.
 
 Typical operation for creating a care team: Create a care recipient. GET the care team via the care recipient's "ID" (external reference ID). Add other users to the care team via POSTing new members to it. Authorize the care team, unless it's intended that the care recipient will log in and do so.
 
@@ -149,12 +150,16 @@ There are 4 categories of users in Vela:
 - Administrators.  
 
 Every user is a member of an organization, and visibility of other users is controlled by the organization hierarchy.
+
 Operations:
-  GET a list of users.
-  GET an individual user via external reference ID, email, or username.
-  Create users.
-  GET /api/v1/admin/user-profiles/by-reference/email/{user_email} accepts either an email address or username via the 'user_email' parameter.
-  Update a user's ID via PUT or PATCH by providing their current ID (External reference ID) in the "id" field and supplying the new id (external reference ID) in the body of the call.
+
+- GET a list of users.
+- Create users.
+- GET an individual user via external reference ID.
+- GET an individual user via GET /api/v1/admin/user-profiles/by-reference/email/{user_email} - accepts either an email address or username via the 'user_email' parameter.
+- Update user via PUT or PATCH.
+
+To update a user's ID via PUT or PATCH you can provide their current ID (External reference ID) in the "id" field and supply the new id (external reference ID) in the body of the call.
 
 ### User suspensions
 
