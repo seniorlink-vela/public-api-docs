@@ -7,6 +7,7 @@
 - [User suspensions](#user-suspensions)
 - [Organizations](#organizations)
 - [Care data](#care-data)
+  - [Appointments](#appointments)
   - [Attachments](#attachments)
   - [Private Messages](#private-messages)
   - [Questionnaires](#questionnaires)
@@ -194,6 +195,14 @@ Operations:
 ## Care data
 
 This is all data specific to a care team - its messaging, and questionnaires related to patient care.
+
+### Appointments
+
+The post to appointments allows user to create a calendar event.
+
+Operations:
+
+- Create (POST an appointment from a provider and can also optionally share with other members in a care team).
 
 ### Attachments
 
