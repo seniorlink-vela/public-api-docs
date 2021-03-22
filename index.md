@@ -198,8 +198,6 @@ This is all data specific to a care team - its messaging, and questionnaires rel
 
 ### Appointments
 
-The post to appointments allows user to create a calendar event.
-
 Operations:
 
 - Create (POST an appointment from a provider and can also optionally share with other members in a care team).
