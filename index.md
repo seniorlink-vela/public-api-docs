@@ -39,7 +39,7 @@ The following steps will have you sending your first Vela Public API request, so
 4. To obtain your ```access_token``` from Vela's OAuth service use the cURL request below:
 
     ```sh
-    curl -X "POST" 'https://oauth.vela.care/public/authentication/token' \
+    curl -X "POST" 'https://app.vela.care/public/authentication/token' \
      -H 'Content-Type: application/x-www-form-urlencoded' \
      --data-urlencode "grant_type=password" \
      --data-urlencode "username=<insert-your-admin-username>" \
@@ -113,9 +113,9 @@ Operations against an existing user profile require the id parameter.  This ID i
 
 Example of flow:
 
-1. Get a token  
+1. Get a token
 2. Get the user by id or email address
-3. Patch the user by id  
+3. Patch the user by id
 
 ## Admin
 
@@ -146,9 +146,9 @@ All user manipulations are under user-profiles in the API.
 There are 4 categories of users in Vela:
 
 - Care recipients (Patients, Members, etc)
-- Caregivers  
-- Professionals  
-- Administrators.  
+- Caregivers
+- Professionals
+- Administrators.
 
 Every user is a member of an organization, and visibility of other users is controlled by the organization hierarchy.
 
@@ -242,29 +242,29 @@ Usage statistics can be viewed at the "/events/usage-by-type" endpoint.
 
 The queues allow data to be pulled from the system to the partner.  The events are a time series of everything happening in vela.
 The different types of events are as follows:
-  user-login  
-  user-created  
-  user-updated  
-  organization-created  
-  organization-update  
-  organization-deleted  
-  user-suspension-created  
-  user-suspension-updated  
-  user-suspension-deleted  
-  care-team-created  
-  care-team-updated  
-  private-message-sent  
-  private-message-updated  
-  alert-message-created  
-  alert-message-updated  
-  alert-message-deleted  
-  questionnaire-created  
-  questionnaire-updated  
-  questionnaire-deleted  
-  questionnaire-assignment-created  
-  questionnaire-assignment-updated  
-  questionnaire-assignment-deleted  
-  questionnaire-assignment-submitted  
+  user-login
+  user-created
+  user-updated
+  organization-created
+  organization-update
+  organization-deleted
+  user-suspension-created
+  user-suspension-updated
+  user-suspension-deleted
+  care-team-created
+  care-team-updated
+  private-message-sent
+  private-message-updated
+  alert-message-created
+  alert-message-updated
+  alert-message-deleted
+  questionnaire-created
+  questionnaire-updated
+  questionnaire-deleted
+  questionnaire-assignment-created
+  questionnaire-assignment-updated
+  questionnaire-assignment-deleted
+  questionnaire-assignment-submitted
     A current list of event_types can be gotten from the event-types GET endpoint.
 
 ## Queues
