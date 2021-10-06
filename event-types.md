@@ -25,6 +25,12 @@
 | 21 | questionnaire-assignment-updated   |
 | 22 | questionnaire-assignment-deleted   |
 | 23 | questionnaire-assignment-submitted |
+| 24 | notification-sent                  |
+| 25 | notification-received              |
+| 26 | notification-failed                |
+| 27 | notification-opened                |
+| 28 | notification-bounced               |
+| 29 | notification-clicked               |
 
 ## Structure of Each Event-Type
 
@@ -38,6 +44,7 @@
 - [Event-type 14, 15, 16](#event-type-14-15-16)
 - [Event-types 17, 18, 19](#event-types-17-18-19)
 - [Event-types 20, 21, 22, 23](#event-types-20-21-22-23)
+- [Event-types 24, 25, 26, 27, 28, 29](#event-types-24-25-26-27-28-29)
 
 ### Event-type 1
 
@@ -363,5 +370,18 @@
               "watcher_type": "USER"
           }
       ]
+  }
+  ```
+
+  ### Event-types 24-25-26-27-28-29
+
+  ```json
+  {
+      "created_at": "2021-09-24T18:15:35Z",
+      "message_id": 1,
+      "message_subject": "test subject",
+      "message_type": "EMAIL",
+      "url_clicked": "test link",
+      "user_ids": [2019906]
   }
   ```
