@@ -201,6 +201,7 @@ This is all data specific to a care team - its messaging, and questionnaires rel
 Operations:
 
 - Create (POST an appointment from a provider and can also optionally share with other members in a care team).
+- Update by id (PUT).
 
 ### Attachments
 
