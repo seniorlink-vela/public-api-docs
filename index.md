@@ -221,6 +221,7 @@ The get endpoint gets any message that fits the parameters supplied - for a give
 Operations:
 
 - Create(POST a private message to a user from a provider on the care team).
+- Create(POST a private message to a default chat of a care team by specifying a default chat key)
 - GET private messages sent to a user and/or in a message thread.
 
 ### Questionnaires
