@@ -201,6 +201,8 @@ This is all data specific to a care team - its messaging, and questionnaires rel
 Operations:
 
 - Create (POST an appointment from a provider and can also optionally share with other members in a care team).
+- Update an appointment by ID (PUT).
+- Delete an appointment by ID.
 
 ### Attachments
 
@@ -219,6 +221,7 @@ The get endpoint gets any message that fits the parameters supplied - for a give
 Operations:
 
 - Create(POST a private message to a user from a provider on the care team).
+- Create(POST a private message to a default chat of a care team by specifying a default chat key)
 - GET private messages sent to a user and/or in a message thread.
 
 ### Questionnaires
