@@ -192,6 +192,11 @@ Operations:
 - List all organizations that are descendants of the id (GET).
 - GET an individual org by ID.
 
+### Care team roles
+
+Operations:
+- List all care team roles available for the ~~partner~~
+
 ## Care data
 
 This is all data specific to a care team - its messaging, and questionnaires related to patient care.
