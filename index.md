@@ -275,6 +275,7 @@ The different types of events are as follows:
 - questionnaire-assignment-deleted
 - questionnaire-assignment-submitted
 - user-activity
+
 A current list of event_types can be gotten from the event-types GET endpoint.
 
 ## Queues
