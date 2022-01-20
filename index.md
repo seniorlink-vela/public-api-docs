@@ -250,30 +250,32 @@ Usage statistics can be viewed at the "/events/usage-by-type" endpoint.
 
 The queues allow data to be pulled from the system to the partner.  The events are a time series of everything happening in vela.
 The different types of events are as follows:
-  user-login
-  user-created
-  user-updated
-  organization-created
-  organization-update
-  organization-deleted
-  user-suspension-created
-  user-suspension-updated
-  user-suspension-deleted
-  care-team-created
-  care-team-updated
-  private-message-sent
-  private-message-updated
-  alert-message-created
-  alert-message-updated
-  alert-message-deleted
-  questionnaire-created
-  questionnaire-updated
-  questionnaire-deleted
-  questionnaire-assignment-created
-  questionnaire-assignment-updated
-  questionnaire-assignment-deleted
-  questionnaire-assignment-submitted
-    A current list of event_types can be gotten from the event-types GET endpoint.
+- user-login
+- user-created
+- user-updated
+- organization-created
+- organization-update
+- organization-deleted
+- user-suspension-created
+- user-suspension-updated
+- user-suspension-deleted
+- care-team-created
+- care-team-updated
+- private-message-sent
+- private-message-updated
+- private-message-read
+- alert-message-created
+- alert-message-updated
+- alert-message-deleted
+- questionnaire-created
+- questionnaire-updated
+- questionnaire-deleted
+- questionnaire-assignment-created
+- questionnaire-assignment-updated
+- questionnaire-assignment-deleted
+- questionnaire-assignment-submitted
+- user-activity
+A current list of event_types can be gotten from the event-types GET endpoint.
 
 ## Queues
 
