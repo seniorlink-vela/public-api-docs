@@ -240,6 +240,15 @@ Operations:
 - Get a questionnaire submission by id.
 - Get a list of questionnaires for this user.
 
+
+### Carepath Topics
+
+The post endpoint allows for an "automated" flag parameter that, when set to true, will automate the carepath topic assignment.  
+
+Operations:
+
+- Create(POST carepath topic).
+
 ## Rate Limiting
 
 Access to the vela APIs is rate limited by a simple leaky bucket algorithm with a shared key so multiple server instances share the same counter.
