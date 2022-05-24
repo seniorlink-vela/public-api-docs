@@ -243,7 +243,7 @@ Operations:
 
 ### Carepath Topics
 
-The post endpoint allows for an "automated" flag parameter that, when set to true, will automate the carepath topic assignment.  
+The post endpoint allows for an "automated" flag parameter that, when set to true, will mark the topic assignment for automation and make it so the users would not be able to complete it manually.  
 
 Operations:
 
