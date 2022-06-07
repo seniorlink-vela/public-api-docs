@@ -284,6 +284,9 @@ The different types of events are as follows:
 - questionnaire-assignment-deleted
 - questionnaire-assignment-submitted
 - user-activity
+- care-path-topic-assignment-created
+- care-path-topic-assignment-updated
+- care-path-topic-assignment-deleted
 
 A current list of event_types can be gotten from the event-types GET endpoint.
 
