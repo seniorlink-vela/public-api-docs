@@ -31,6 +31,11 @@
 | 27 | notification-opened                |
 | 28 | notification-bounced               |
 | 29 | notification-clicked               |
+| 30 | chat_message_read                  |
+| 31 | user_activity                      |
+| 32 | care_path_topic_assignment_created |
+| 33 | care_path_topic_assignment_updated |
+| 34 | care_path_topic_assignment_deleted |
 
 ## Structure of Each Event-Type
 
@@ -45,6 +50,7 @@
 - [Event-types 17, 18, 19](#event-types-17-18-19)
 - [Event-types 20, 21, 22, 23](#event-types-20-21-22-23)
 - [Event-types 24, 25, 26, 27, 28, 29](#event-types-24-25-26-27-28-29)
+- [Event-types 32,33,34](#event-types-32-33-34)
 
 ### Event-type 1
 
@@ -384,4 +390,32 @@
       "url_clicked": "test link",
       "user_ids": [2019906]
   }
+  ```
+
+  ### Event-types 32-33-34
+
+  ```json
+    {
+            "automated": false,
+            "care_team_id": 323576,
+            "created_at": "2022-06-07T17:44:15Z",
+            "created_by": "V00001799890000039598",
+            "id": 140383,
+            "item_statuses": [
+                {
+                    "status": "IN_PROGRESS",
+                    "topic_node_id": 793478
+                },
+                {
+                    "status": "COMPLETE",
+                    "topic_node_id": 793477
+                }
+            ],
+            "resume_at": null,
+            "status": "IN_PROGRESS",
+            "topic_id": 793474,
+            "topic_identifier": "12",
+            "updated_at": "2022-06-07T17:44:51Z",
+            "updated_by": "V00001799890000039598"
+    }
   ```
