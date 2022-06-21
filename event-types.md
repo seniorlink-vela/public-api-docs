@@ -31,8 +31,8 @@
 | 27 | notification-opened                |
 | 28 | notification-bounced               |
 | 29 | notification-clicked               |
-| 30 | chat_message_read                  |
-| 31 | user_activity                      |
+| 30 | private-message-read               |
+| 31 | user-activity                      |
 | 32 | care_path_topic_assignment_created |
 | 33 | care_path_topic_assignment_updated |
 | 34 | care_path_topic_assignment_deleted |
@@ -50,6 +50,8 @@
 - [Event-types 17, 18, 19](#event-types-17-18-19)
 - [Event-types 20, 21, 22, 23](#event-types-20-21-22-23)
 - [Event-types 24, 25, 26, 27, 28, 29](#event-types-24-25-26-27-28-29)
+- [Event-type 30](#event-type-30)
+- [Event-type 31](#event-type-31)
 - [Event-types 32,33,34](#event-types-32-33-34)
 
 ### Event-type 1
@@ -392,7 +394,34 @@
   }
   ```
 
-  ### Event-types 32-33-34
+### Event-type 30
+```json
+{
+    "chat_message_id": 1,
+    "reader_user_id": "V00001799890000039598",
+    "care_team_id": 5,
+    "read_at": "2021-09-24T18:15:35Z"
+}
+```
+
+### Event-type 31
+```json
+{
+    "activity_data": {
+        "chat_message_id": 9499581,
+        "current_user_id": "V00001661540000006293",
+        "message_thread_id": 3386641
+    },
+    "activity_target": { "file_id": null, "url": "https://example.com" },
+    "activity_time": "2022-01-20T14:28:31Z",
+    "activity_type": "URL_CLICKED",
+    "client_app_name": "VELA_PRO_WEB",
+    "user_id": "V00001661540000006293",
+    "username": "example_cm"
+}
+```
+
+### Event-types 32-33-34
 
   ```json
     {
