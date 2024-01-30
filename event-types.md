@@ -451,7 +451,7 @@
     }
   ```
 
-  ### Event-types 35
+  ### Event-type 35
 
   ```json
   {
