@@ -54,6 +54,7 @@
 - [Event-type 30](#event-type-30)
 - [Event-type 31](#event-type-31)
 - [Event-types 32,33,34](#event-types-32-33-34)
+- [Event-type 35](#event-type-35)
 
 ### Event-type 1
 
