@@ -36,6 +36,7 @@
 | 32 | care_path_topic_assignment_created |
 | 33 | care_path_topic_assignment_updated |
 | 34 | care_path_topic_assignment_deleted |
+| 35 | user-application-access            |
 
 ## Structure of Each Event-Type
 
@@ -53,6 +54,7 @@
 - [Event-type 30](#event-type-30)
 - [Event-type 31](#event-type-31)
 - [Event-types 32,33,34](#event-types-32-33-34)
+- [Event-type 35](#event-type-35)
 
 ### Event-type 1
 
@@ -447,4 +449,16 @@
             "updated_at": "2022-06-07T17:44:51Z",
             "updated_by": "V00001799890000039598"
     }
+  ```
+
+  ### Event-type 35
+
+  ```json
+  {
+      "client_application": "VELA_PRO_WEB",
+      "user_id": "vela_example_347",
+      "username": "example_cm",
+      "access_granted_flag": "true",
+      "recorded_at": "2023-04-24T15:15:39Z"
+  }
   ```

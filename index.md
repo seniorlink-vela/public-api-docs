@@ -287,6 +287,7 @@ The different types of events are as follows:
 - care-path-topic-assignment-created
 - care-path-topic-assignment-updated
 - care-path-topic-assignment-deleted
+- user-application-access
 
 A current list of event_types can be gotten from the event-types GET endpoint.
 
